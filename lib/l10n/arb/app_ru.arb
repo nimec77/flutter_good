@@ -1,0 +1,11 @@
+{
+  "@@locale": "ru",
+  "counterAppBarTitle": "Счетчик",
+  "@counterAppBarTitle": {
+    "description": "Текст показывается на AppBar в Count Page"
+  },
+  "searchAppBarTitle": "Поиск",
+  "@searchAppBarTitle": {
+    "description": "Текст показывается на AppBar в Search Page"
+  }
+}
