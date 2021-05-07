@@ -18,6 +18,7 @@ dependencies:
   intl: ^0.17.0
 
 dev_dependencies:
+  async:
   flutter_test:
     sdk: flutter
   bloc_test: ^8.0.0

@@ -23,9 +23,9 @@ class TextRepositoryImp implements TextRepository {
     final result = <TextData>[];
 
     for (final item in _searchText(query)) {
+      yield result;
       await Future.delayed(const Duration(seconds: 1));
       result.add(item);
-      yield result;
     }
   }
 
@@ -34,9 +34,4 @@ class TextRepositoryImp implements TextRepository {
         .where((element) => element.toLowerCase().contains(query.toLowerCase()))
         .map((e) => TextData(e, DateTime.now()));
   }
-
-  // @override
-  // Either<TextDataFailure, Stream<int>> test() {
-  //   return right(Stream.value(1));
-  // }
 }
