@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter_good/search/use_cases/bloc/search/search_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_good/search/search.dart';
@@ -10,16 +11,18 @@ void main() {
   group('SearchBloc', () {
     final mockTextRepository = MockTextRepository();
     final searchResult = [TextData('Text 0', DateTime.now())];
-    final searchStream = Stream<Either<TextDataFailure, Iterable<TextData>>>.value(Right(searchResult));
+    final searchStreamResult = Stream<Either<TextDataFailure, Iterable<TextData>>>.value(right(searchResult));
+    final searchFailure = const TextDataFailure.error('Test error');
+    final searchStreamFailure = Stream<Either<TextDataFailure, Iterable<TextData>>>.value(left(searchFailure));
 
     test('Initial state is initial', () {
       expect(SearchBloc(mockTextRepository).state, equals(const SearchState.initial()));
     });
 
     blocTest<SearchBloc, SearchState>(
-      'emits [], when successful',
+      'emits [SearchState.searchInProgress, SearchState.searchSuccess], when successful',
       build: () {
-        when(() => mockTextRepository.searchText(any())).thenAnswer((_) => searchStream);
+        when(() => mockTextRepository.searchText(any())).thenAnswer((_) => searchStreamResult);
 
         return SearchBloc(mockTextRepository);
       },
@@ -27,6 +30,47 @@ void main() {
       expect: () => [
         const SearchState.searchInProgress(),
         SearchState.searchSuccess(searchResult),
+      ],
+    );
+
+    blocTest<SearchBloc, SearchState>(
+      'emits [SearchState.searchInProgress, SearchState.failure] when unsuccessful',
+      build: () {
+        when(() => mockTextRepository.searchText(any())).thenAnswer((_) => searchStreamFailure);
+
+        return SearchBloc(mockTextRepository);
+      },
+      act: (searchBloc) => searchBloc.add(const SearchEvent.started('query')),
+      expect: () => [
+        const SearchState.searchInProgress(),
+        SearchState.searchFailure(searchFailure),
+      ],
+    );
+
+    blocTest<SearchBloc, SearchState>(
+      'emits [SearchState.searchSuccess] when event SearchEvent.textDataReceived successful',
+      build: () {
+        when(() => mockTextRepository.searchText(any())).thenAnswer((_) => searchStreamResult);
+
+        return SearchBloc(mockTextRepository);
+      },
+      act: (searchBloc) => searchBloc.add(SearchEvent.textDataReceived(right(searchResult))),
+      expect: () => [
+        SearchState.searchSuccess(searchResult),
+      ],
+    );
+
+    blocTest<SearchBloc, SearchState>(
+      'emits [SearchState.searchFailure] when event SearchEvent.textDataReceived unsuccessful',
+      build: () {
+        when(() => mockTextRepository.searchText(any())).thenAnswer((_) => searchStreamFailure);
+
+        return SearchBloc(mockTextRepository);
+      },
+      act: (searchBloc) =>
+          searchBloc.add(SearchEvent.textDataReceived(left(const TextDataFailure.error('Test error')))),
+      expect: () => [
+        SearchState.searchFailure(searchFailure),
       ],
     );
   });
