@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TextSearch extends SearchDelegate {
-  TextSearch(this.list);
+  TextSearch();
 
-  final List<String> list;
   String prevQuery = '';
   String selectedResult = '';
   Set<String> recent = {};
@@ -49,9 +48,7 @@ class TextSearch extends SearchDelegate {
         query = prevQuery;
       }
     }
-    final suggestionList = query.isEmpty
-        ? recent.toList()
-        : list.where((element) => element.toLowerCase().contains(query.toLowerCase())).toList();
+    final suggestionList = [];
     return ListView.builder(
       itemCount: suggestionList.length,
       itemBuilder: (context, index) {

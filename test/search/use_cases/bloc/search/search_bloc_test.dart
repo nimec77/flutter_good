@@ -11,9 +11,9 @@ void main() {
   group('SearchBloc', () {
     final mockTextRepository = MockTextRepository();
     final searchResult = [TextData('Text 0', DateTime.now())];
-    final searchStreamResult = Stream<Either<TextDataFailure, Iterable<TextData>>>.value(right(searchResult));
+    final searchStreamResult = Stream<Either<TextDataFailure, List<TextData>>>.value(right(searchResult));
     final searchFailure = const TextDataFailure.error('Test error');
-    final searchStreamFailure = Stream<Either<TextDataFailure, Iterable<TextData>>>.value(left(searchFailure));
+    final searchStreamFailure = Stream<Either<TextDataFailure, List<TextData>>>.value(left(searchFailure));
 
     test('Initial state is initial', () {
       expect(SearchBloc(mockTextRepository).state, equals(const SearchState.initial()));
@@ -49,11 +49,7 @@ void main() {
 
     blocTest<SearchBloc, SearchState>(
       'emits [SearchState.searchSuccess] when event SearchEvent.textDataReceived successful',
-      build: () {
-        when(() => mockTextRepository.searchText(any())).thenAnswer((_) => searchStreamResult);
-
-        return SearchBloc(mockTextRepository);
-      },
+      build: () => SearchBloc(mockTextRepository),
       act: (searchBloc) => searchBloc.add(SearchEvent.textDataReceived(right(searchResult))),
       expect: () => [
         SearchState.searchSuccess(searchResult),
@@ -62,11 +58,7 @@ void main() {
 
     blocTest<SearchBloc, SearchState>(
       'emits [SearchState.searchFailure] when event SearchEvent.textDataReceived unsuccessful',
-      build: () {
-        when(() => mockTextRepository.searchText(any())).thenAnswer((_) => searchStreamFailure);
-
-        return SearchBloc(mockTextRepository);
-      },
+      build: () => SearchBloc(mockTextRepository),
       act: (searchBloc) =>
           searchBloc.add(SearchEvent.textDataReceived(left(const TextDataFailure.error('Test error')))),
       expect: () => [

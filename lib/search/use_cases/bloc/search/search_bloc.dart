@@ -46,14 +46,16 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     await _textDataStreamSubscription?.cancel();
     _textDataStreamSubscription = textRepository
         .searchText(query)
-        .listen((failureOrTextsData) => add(SearchEvent.textDataReceived(failureOrTextsData)));
+        .listen((failureOrTextsData) {
+          add(SearchEvent.textDataReceived(failureOrTextsData));
+        });
   }
 
   Stream<SearchState> _mapTextDataReceivedEventToState(
       Either<TextDataFailure, Iterable<TextData>> failureOrTextsData) async* {
     yield failureOrTextsData.fold(
       (failure) => SearchState.searchFailure(failure),
-      (textsData) => SearchState.searchSuccess(textsData),
+      (textsData) => SearchState.searchSuccess(textsData.toList()),
     );
   }
 }

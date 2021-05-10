@@ -10,9 +10,9 @@ class TextRepositoryImp implements TextRepository {
   final list = List.generate(100, (index) => 'Text $index');
 
   @override
-  Stream<Either<TextDataFailure, Iterable<TextData>>> searchText(String query) {
+  Stream<Either<TextDataFailure, List<TextData>>> searchText(String query) {
     return _searchText$(query)
-        .map((textsData) => right<TextDataFailure, Iterable<TextData>>(textsData))
+        .map((textsData) => right<TextDataFailure, List<TextData>>(textsData))
         .onErrorReturnWith((error, stackTrace) {
       if (error is HttpException) {
         return left(TextDataFailure.error(error.message));
@@ -30,7 +30,7 @@ class TextRepositoryImp implements TextRepository {
   //   return left(const TextDataFailure.unexpected());
   // }
 
-  Stream<Iterable<TextData>> _searchText$(String query) async* {
+  Stream<List<TextData>> _searchText$(String query) async* {
     final result = <TextData>[];
 
     for (final item in _searchText(query)) {

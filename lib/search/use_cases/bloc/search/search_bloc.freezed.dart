@@ -333,22 +333,22 @@ abstract class _SearchEventReceived implements SearchEvent {
 class _$SearchStateTearOff {
   const _$SearchStateTearOff();
 
-  _SearchStateInitial initial() {
-    return const _SearchStateInitial();
+  SearchStateInitial initial() {
+    return const SearchStateInitial();
   }
 
-  _SearchStateInProgress searchInProgress() {
-    return const _SearchStateInProgress();
+  SearchStateInProgress searchInProgress() {
+    return const SearchStateInProgress();
   }
 
-  _SearchStateSuccess searchSuccess(Iterable<TextData> texts) {
-    return _SearchStateSuccess(
-      texts,
+  SearchStateSuccess searchSuccess(List<TextData> textsData) {
+    return SearchStateSuccess(
+      textsData,
     );
   }
 
-  _SearchStateFailure searchFailure(TextDataFailure textDataFailure) {
-    return _SearchStateFailure(
+  SearchStateFailure searchFailure(TextDataFailure textDataFailure) {
+    return SearchStateFailure(
       textDataFailure,
     );
   }
@@ -363,7 +363,7 @@ mixin _$SearchState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() searchInProgress,
-    required TResult Function(Iterable<TextData> texts) searchSuccess,
+    required TResult Function(List<TextData> textsData) searchSuccess,
     required TResult Function(TextDataFailure textDataFailure) searchFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -371,25 +371,25 @@ mixin _$SearchState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? searchInProgress,
-    TResult Function(Iterable<TextData> texts)? searchSuccess,
+    TResult Function(List<TextData> textsData)? searchSuccess,
     TResult Function(TextDataFailure textDataFailure)? searchFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SearchStateInitial value) initial,
-    required TResult Function(_SearchStateInProgress value) searchInProgress,
-    required TResult Function(_SearchStateSuccess value) searchSuccess,
-    required TResult Function(_SearchStateFailure value) searchFailure,
+    required TResult Function(SearchStateInitial value) initial,
+    required TResult Function(SearchStateInProgress value) searchInProgress,
+    required TResult Function(SearchStateSuccess value) searchSuccess,
+    required TResult Function(SearchStateFailure value) searchFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SearchStateInitial value)? initial,
-    TResult Function(_SearchStateInProgress value)? searchInProgress,
-    TResult Function(_SearchStateSuccess value)? searchSuccess,
-    TResult Function(_SearchStateFailure value)? searchFailure,
+    TResult Function(SearchStateInitial value)? initial,
+    TResult Function(SearchStateInProgress value)? searchInProgress,
+    TResult Function(SearchStateSuccess value)? searchSuccess,
+    TResult Function(SearchStateFailure value)? searchFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -412,28 +412,28 @@ class _$SearchStateCopyWithImpl<$Res> implements $SearchStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$SearchStateInitialCopyWith<$Res> {
-  factory _$SearchStateInitialCopyWith(
-          _SearchStateInitial value, $Res Function(_SearchStateInitial) then) =
-      __$SearchStateInitialCopyWithImpl<$Res>;
+abstract class $SearchStateInitialCopyWith<$Res> {
+  factory $SearchStateInitialCopyWith(
+          SearchStateInitial value, $Res Function(SearchStateInitial) then) =
+      _$SearchStateInitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$SearchStateInitialCopyWithImpl<$Res>
+class _$SearchStateInitialCopyWithImpl<$Res>
     extends _$SearchStateCopyWithImpl<$Res>
-    implements _$SearchStateInitialCopyWith<$Res> {
-  __$SearchStateInitialCopyWithImpl(
-      _SearchStateInitial _value, $Res Function(_SearchStateInitial) _then)
-      : super(_value, (v) => _then(v as _SearchStateInitial));
+    implements $SearchStateInitialCopyWith<$Res> {
+  _$SearchStateInitialCopyWithImpl(
+      SearchStateInitial _value, $Res Function(SearchStateInitial) _then)
+      : super(_value, (v) => _then(v as SearchStateInitial));
 
   @override
-  _SearchStateInitial get _value => super._value as _SearchStateInitial;
+  SearchStateInitial get _value => super._value as SearchStateInitial;
 }
 
 /// @nodoc
 
-class _$_SearchStateInitial implements _SearchStateInitial {
-  const _$_SearchStateInitial();
+class _$SearchStateInitial implements SearchStateInitial {
+  const _$SearchStateInitial();
 
   @override
   String toString() {
@@ -442,7 +442,7 @@ class _$_SearchStateInitial implements _SearchStateInitial {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _SearchStateInitial);
+    return identical(this, other) || (other is SearchStateInitial);
   }
 
   @override
@@ -453,7 +453,7 @@ class _$_SearchStateInitial implements _SearchStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() searchInProgress,
-    required TResult Function(Iterable<TextData> texts) searchSuccess,
+    required TResult Function(List<TextData> textsData) searchSuccess,
     required TResult Function(TextDataFailure textDataFailure) searchFailure,
   }) {
     return initial();
@@ -464,7 +464,7 @@ class _$_SearchStateInitial implements _SearchStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? searchInProgress,
-    TResult Function(Iterable<TextData> texts)? searchSuccess,
+    TResult Function(List<TextData> textsData)? searchSuccess,
     TResult Function(TextDataFailure textDataFailure)? searchFailure,
     required TResult orElse(),
   }) {
@@ -477,10 +477,10 @@ class _$_SearchStateInitial implements _SearchStateInitial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SearchStateInitial value) initial,
-    required TResult Function(_SearchStateInProgress value) searchInProgress,
-    required TResult Function(_SearchStateSuccess value) searchSuccess,
-    required TResult Function(_SearchStateFailure value) searchFailure,
+    required TResult Function(SearchStateInitial value) initial,
+    required TResult Function(SearchStateInProgress value) searchInProgress,
+    required TResult Function(SearchStateSuccess value) searchSuccess,
+    required TResult Function(SearchStateFailure value) searchFailure,
   }) {
     return initial(this);
   }
@@ -488,10 +488,10 @@ class _$_SearchStateInitial implements _SearchStateInitial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SearchStateInitial value)? initial,
-    TResult Function(_SearchStateInProgress value)? searchInProgress,
-    TResult Function(_SearchStateSuccess value)? searchSuccess,
-    TResult Function(_SearchStateFailure value)? searchFailure,
+    TResult Function(SearchStateInitial value)? initial,
+    TResult Function(SearchStateInProgress value)? searchInProgress,
+    TResult Function(SearchStateSuccess value)? searchSuccess,
+    TResult Function(SearchStateFailure value)? searchFailure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -501,33 +501,33 @@ class _$_SearchStateInitial implements _SearchStateInitial {
   }
 }
 
-abstract class _SearchStateInitial implements SearchState {
-  const factory _SearchStateInitial() = _$_SearchStateInitial;
+abstract class SearchStateInitial implements SearchState {
+  const factory SearchStateInitial() = _$SearchStateInitial;
 }
 
 /// @nodoc
-abstract class _$SearchStateInProgressCopyWith<$Res> {
-  factory _$SearchStateInProgressCopyWith(_SearchStateInProgress value,
-          $Res Function(_SearchStateInProgress) then) =
-      __$SearchStateInProgressCopyWithImpl<$Res>;
+abstract class $SearchStateInProgressCopyWith<$Res> {
+  factory $SearchStateInProgressCopyWith(SearchStateInProgress value,
+          $Res Function(SearchStateInProgress) then) =
+      _$SearchStateInProgressCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$SearchStateInProgressCopyWithImpl<$Res>
+class _$SearchStateInProgressCopyWithImpl<$Res>
     extends _$SearchStateCopyWithImpl<$Res>
-    implements _$SearchStateInProgressCopyWith<$Res> {
-  __$SearchStateInProgressCopyWithImpl(_SearchStateInProgress _value,
-      $Res Function(_SearchStateInProgress) _then)
-      : super(_value, (v) => _then(v as _SearchStateInProgress));
+    implements $SearchStateInProgressCopyWith<$Res> {
+  _$SearchStateInProgressCopyWithImpl(
+      SearchStateInProgress _value, $Res Function(SearchStateInProgress) _then)
+      : super(_value, (v) => _then(v as SearchStateInProgress));
 
   @override
-  _SearchStateInProgress get _value => super._value as _SearchStateInProgress;
+  SearchStateInProgress get _value => super._value as SearchStateInProgress;
 }
 
 /// @nodoc
 
-class _$_SearchStateInProgress implements _SearchStateInProgress {
-  const _$_SearchStateInProgress();
+class _$SearchStateInProgress implements SearchStateInProgress {
+  const _$SearchStateInProgress();
 
   @override
   String toString() {
@@ -536,7 +536,7 @@ class _$_SearchStateInProgress implements _SearchStateInProgress {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _SearchStateInProgress);
+    return identical(this, other) || (other is SearchStateInProgress);
   }
 
   @override
@@ -547,7 +547,7 @@ class _$_SearchStateInProgress implements _SearchStateInProgress {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() searchInProgress,
-    required TResult Function(Iterable<TextData> texts) searchSuccess,
+    required TResult Function(List<TextData> textsData) searchSuccess,
     required TResult Function(TextDataFailure textDataFailure) searchFailure,
   }) {
     return searchInProgress();
@@ -558,7 +558,7 @@ class _$_SearchStateInProgress implements _SearchStateInProgress {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? searchInProgress,
-    TResult Function(Iterable<TextData> texts)? searchSuccess,
+    TResult Function(List<TextData> textsData)? searchSuccess,
     TResult Function(TextDataFailure textDataFailure)? searchFailure,
     required TResult orElse(),
   }) {
@@ -571,10 +571,10 @@ class _$_SearchStateInProgress implements _SearchStateInProgress {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SearchStateInitial value) initial,
-    required TResult Function(_SearchStateInProgress value) searchInProgress,
-    required TResult Function(_SearchStateSuccess value) searchSuccess,
-    required TResult Function(_SearchStateFailure value) searchFailure,
+    required TResult Function(SearchStateInitial value) initial,
+    required TResult Function(SearchStateInProgress value) searchInProgress,
+    required TResult Function(SearchStateSuccess value) searchSuccess,
+    required TResult Function(SearchStateFailure value) searchFailure,
   }) {
     return searchInProgress(this);
   }
@@ -582,10 +582,10 @@ class _$_SearchStateInProgress implements _SearchStateInProgress {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SearchStateInitial value)? initial,
-    TResult Function(_SearchStateInProgress value)? searchInProgress,
-    TResult Function(_SearchStateSuccess value)? searchSuccess,
-    TResult Function(_SearchStateFailure value)? searchFailure,
+    TResult Function(SearchStateInitial value)? initial,
+    TResult Function(SearchStateInProgress value)? searchInProgress,
+    TResult Function(SearchStateSuccess value)? searchSuccess,
+    TResult Function(SearchStateFailure value)? searchFailure,
     required TResult orElse(),
   }) {
     if (searchInProgress != null) {
@@ -595,81 +595,82 @@ class _$_SearchStateInProgress implements _SearchStateInProgress {
   }
 }
 
-abstract class _SearchStateInProgress implements SearchState {
-  const factory _SearchStateInProgress() = _$_SearchStateInProgress;
+abstract class SearchStateInProgress implements SearchState {
+  const factory SearchStateInProgress() = _$SearchStateInProgress;
 }
 
 /// @nodoc
-abstract class _$SearchStateSuccessCopyWith<$Res> {
-  factory _$SearchStateSuccessCopyWith(
-          _SearchStateSuccess value, $Res Function(_SearchStateSuccess) then) =
-      __$SearchStateSuccessCopyWithImpl<$Res>;
-  $Res call({Iterable<TextData> texts});
+abstract class $SearchStateSuccessCopyWith<$Res> {
+  factory $SearchStateSuccessCopyWith(
+          SearchStateSuccess value, $Res Function(SearchStateSuccess) then) =
+      _$SearchStateSuccessCopyWithImpl<$Res>;
+  $Res call({List<TextData> textsData});
 }
 
 /// @nodoc
-class __$SearchStateSuccessCopyWithImpl<$Res>
+class _$SearchStateSuccessCopyWithImpl<$Res>
     extends _$SearchStateCopyWithImpl<$Res>
-    implements _$SearchStateSuccessCopyWith<$Res> {
-  __$SearchStateSuccessCopyWithImpl(
-      _SearchStateSuccess _value, $Res Function(_SearchStateSuccess) _then)
-      : super(_value, (v) => _then(v as _SearchStateSuccess));
+    implements $SearchStateSuccessCopyWith<$Res> {
+  _$SearchStateSuccessCopyWithImpl(
+      SearchStateSuccess _value, $Res Function(SearchStateSuccess) _then)
+      : super(_value, (v) => _then(v as SearchStateSuccess));
 
   @override
-  _SearchStateSuccess get _value => super._value as _SearchStateSuccess;
+  SearchStateSuccess get _value => super._value as SearchStateSuccess;
 
   @override
   $Res call({
-    Object? texts = freezed,
+    Object? textsData = freezed,
   }) {
-    return _then(_SearchStateSuccess(
-      texts == freezed
-          ? _value.texts
-          : texts // ignore: cast_nullable_to_non_nullable
-              as Iterable<TextData>,
+    return _then(SearchStateSuccess(
+      textsData == freezed
+          ? _value.textsData
+          : textsData // ignore: cast_nullable_to_non_nullable
+              as List<TextData>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_SearchStateSuccess implements _SearchStateSuccess {
-  const _$_SearchStateSuccess(this.texts);
+class _$SearchStateSuccess implements SearchStateSuccess {
+  const _$SearchStateSuccess(this.textsData);
 
   @override
-  final Iterable<TextData> texts;
+  final List<TextData> textsData;
 
   @override
   String toString() {
-    return 'SearchState.searchSuccess(texts: $texts)';
+    return 'SearchState.searchSuccess(textsData: $textsData)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _SearchStateSuccess &&
-            (identical(other.texts, texts) ||
-                const DeepCollectionEquality().equals(other.texts, texts)));
+        (other is SearchStateSuccess &&
+            (identical(other.textsData, textsData) ||
+                const DeepCollectionEquality()
+                    .equals(other.textsData, textsData)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(texts);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(textsData);
 
   @JsonKey(ignore: true)
   @override
-  _$SearchStateSuccessCopyWith<_SearchStateSuccess> get copyWith =>
-      __$SearchStateSuccessCopyWithImpl<_SearchStateSuccess>(this, _$identity);
+  $SearchStateSuccessCopyWith<SearchStateSuccess> get copyWith =>
+      _$SearchStateSuccessCopyWithImpl<SearchStateSuccess>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() searchInProgress,
-    required TResult Function(Iterable<TextData> texts) searchSuccess,
+    required TResult Function(List<TextData> textsData) searchSuccess,
     required TResult Function(TextDataFailure textDataFailure) searchFailure,
   }) {
-    return searchSuccess(texts);
+    return searchSuccess(textsData);
   }
 
   @override
@@ -677,12 +678,12 @@ class _$_SearchStateSuccess implements _SearchStateSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? searchInProgress,
-    TResult Function(Iterable<TextData> texts)? searchSuccess,
+    TResult Function(List<TextData> textsData)? searchSuccess,
     TResult Function(TextDataFailure textDataFailure)? searchFailure,
     required TResult orElse(),
   }) {
     if (searchSuccess != null) {
-      return searchSuccess(texts);
+      return searchSuccess(textsData);
     }
     return orElse();
   }
@@ -690,10 +691,10 @@ class _$_SearchStateSuccess implements _SearchStateSuccess {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SearchStateInitial value) initial,
-    required TResult Function(_SearchStateInProgress value) searchInProgress,
-    required TResult Function(_SearchStateSuccess value) searchSuccess,
-    required TResult Function(_SearchStateFailure value) searchFailure,
+    required TResult Function(SearchStateInitial value) initial,
+    required TResult Function(SearchStateInProgress value) searchInProgress,
+    required TResult Function(SearchStateSuccess value) searchSuccess,
+    required TResult Function(SearchStateFailure value) searchFailure,
   }) {
     return searchSuccess(this);
   }
@@ -701,10 +702,10 @@ class _$_SearchStateSuccess implements _SearchStateSuccess {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SearchStateInitial value)? initial,
-    TResult Function(_SearchStateInProgress value)? searchInProgress,
-    TResult Function(_SearchStateSuccess value)? searchSuccess,
-    TResult Function(_SearchStateFailure value)? searchFailure,
+    TResult Function(SearchStateInitial value)? initial,
+    TResult Function(SearchStateInProgress value)? searchInProgress,
+    TResult Function(SearchStateSuccess value)? searchSuccess,
+    TResult Function(SearchStateFailure value)? searchFailure,
     required TResult orElse(),
   }) {
     if (searchSuccess != null) {
@@ -714,42 +715,42 @@ class _$_SearchStateSuccess implements _SearchStateSuccess {
   }
 }
 
-abstract class _SearchStateSuccess implements SearchState {
-  const factory _SearchStateSuccess(Iterable<TextData> texts) =
-      _$_SearchStateSuccess;
+abstract class SearchStateSuccess implements SearchState {
+  const factory SearchStateSuccess(List<TextData> textsData) =
+      _$SearchStateSuccess;
 
-  Iterable<TextData> get texts => throw _privateConstructorUsedError;
+  List<TextData> get textsData => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$SearchStateSuccessCopyWith<_SearchStateSuccess> get copyWith =>
+  $SearchStateSuccessCopyWith<SearchStateSuccess> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$SearchStateFailureCopyWith<$Res> {
-  factory _$SearchStateFailureCopyWith(
-          _SearchStateFailure value, $Res Function(_SearchStateFailure) then) =
-      __$SearchStateFailureCopyWithImpl<$Res>;
+abstract class $SearchStateFailureCopyWith<$Res> {
+  factory $SearchStateFailureCopyWith(
+          SearchStateFailure value, $Res Function(SearchStateFailure) then) =
+      _$SearchStateFailureCopyWithImpl<$Res>;
   $Res call({TextDataFailure textDataFailure});
 
   $TextDataFailureCopyWith<$Res> get textDataFailure;
 }
 
 /// @nodoc
-class __$SearchStateFailureCopyWithImpl<$Res>
+class _$SearchStateFailureCopyWithImpl<$Res>
     extends _$SearchStateCopyWithImpl<$Res>
-    implements _$SearchStateFailureCopyWith<$Res> {
-  __$SearchStateFailureCopyWithImpl(
-      _SearchStateFailure _value, $Res Function(_SearchStateFailure) _then)
-      : super(_value, (v) => _then(v as _SearchStateFailure));
+    implements $SearchStateFailureCopyWith<$Res> {
+  _$SearchStateFailureCopyWithImpl(
+      SearchStateFailure _value, $Res Function(SearchStateFailure) _then)
+      : super(_value, (v) => _then(v as SearchStateFailure));
 
   @override
-  _SearchStateFailure get _value => super._value as _SearchStateFailure;
+  SearchStateFailure get _value => super._value as SearchStateFailure;
 
   @override
   $Res call({
     Object? textDataFailure = freezed,
   }) {
-    return _then(_SearchStateFailure(
+    return _then(SearchStateFailure(
       textDataFailure == freezed
           ? _value.textDataFailure
           : textDataFailure // ignore: cast_nullable_to_non_nullable
@@ -767,8 +768,8 @@ class __$SearchStateFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SearchStateFailure implements _SearchStateFailure {
-  const _$_SearchStateFailure(this.textDataFailure);
+class _$SearchStateFailure implements SearchStateFailure {
+  const _$SearchStateFailure(this.textDataFailure);
 
   @override
   final TextDataFailure textDataFailure;
@@ -781,7 +782,7 @@ class _$_SearchStateFailure implements _SearchStateFailure {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _SearchStateFailure &&
+        (other is SearchStateFailure &&
             (identical(other.textDataFailure, textDataFailure) ||
                 const DeepCollectionEquality()
                     .equals(other.textDataFailure, textDataFailure)));
@@ -794,15 +795,15 @@ class _$_SearchStateFailure implements _SearchStateFailure {
 
   @JsonKey(ignore: true)
   @override
-  _$SearchStateFailureCopyWith<_SearchStateFailure> get copyWith =>
-      __$SearchStateFailureCopyWithImpl<_SearchStateFailure>(this, _$identity);
+  $SearchStateFailureCopyWith<SearchStateFailure> get copyWith =>
+      _$SearchStateFailureCopyWithImpl<SearchStateFailure>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() searchInProgress,
-    required TResult Function(Iterable<TextData> texts) searchSuccess,
+    required TResult Function(List<TextData> textsData) searchSuccess,
     required TResult Function(TextDataFailure textDataFailure) searchFailure,
   }) {
     return searchFailure(textDataFailure);
@@ -813,7 +814,7 @@ class _$_SearchStateFailure implements _SearchStateFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? searchInProgress,
-    TResult Function(Iterable<TextData> texts)? searchSuccess,
+    TResult Function(List<TextData> textsData)? searchSuccess,
     TResult Function(TextDataFailure textDataFailure)? searchFailure,
     required TResult orElse(),
   }) {
@@ -826,10 +827,10 @@ class _$_SearchStateFailure implements _SearchStateFailure {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SearchStateInitial value) initial,
-    required TResult Function(_SearchStateInProgress value) searchInProgress,
-    required TResult Function(_SearchStateSuccess value) searchSuccess,
-    required TResult Function(_SearchStateFailure value) searchFailure,
+    required TResult Function(SearchStateInitial value) initial,
+    required TResult Function(SearchStateInProgress value) searchInProgress,
+    required TResult Function(SearchStateSuccess value) searchSuccess,
+    required TResult Function(SearchStateFailure value) searchFailure,
   }) {
     return searchFailure(this);
   }
@@ -837,10 +838,10 @@ class _$_SearchStateFailure implements _SearchStateFailure {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SearchStateInitial value)? initial,
-    TResult Function(_SearchStateInProgress value)? searchInProgress,
-    TResult Function(_SearchStateSuccess value)? searchSuccess,
-    TResult Function(_SearchStateFailure value)? searchFailure,
+    TResult Function(SearchStateInitial value)? initial,
+    TResult Function(SearchStateInProgress value)? searchInProgress,
+    TResult Function(SearchStateSuccess value)? searchSuccess,
+    TResult Function(SearchStateFailure value)? searchFailure,
     required TResult orElse(),
   }) {
     if (searchFailure != null) {
@@ -850,12 +851,12 @@ class _$_SearchStateFailure implements _SearchStateFailure {
   }
 }
 
-abstract class _SearchStateFailure implements SearchState {
-  const factory _SearchStateFailure(TextDataFailure textDataFailure) =
-      _$_SearchStateFailure;
+abstract class SearchStateFailure implements SearchState {
+  const factory SearchStateFailure(TextDataFailure textDataFailure) =
+      _$SearchStateFailure;
 
   TextDataFailure get textDataFailure => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$SearchStateFailureCopyWith<_SearchStateFailure> get copyWith =>
+  $SearchStateFailureCopyWith<SearchStateFailure> get copyWith =>
       throw _privateConstructorUsedError;
 }
