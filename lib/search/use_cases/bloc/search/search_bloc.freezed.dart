@@ -23,7 +23,7 @@ class _$SearchEventTearOff {
   }
 
   _SearchEventReceived textDataReceived(
-      Either<TextDataFailure, Iterable<TextData>> failureOrTextsData) {
+      Either<TextDataFailure, List<TextData>> failureOrTextsData) {
     return _SearchEventReceived(
       failureOrTextsData,
     );
@@ -39,7 +39,7 @@ mixin _$SearchEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String query) started,
     required TResult Function(
-            Either<TextDataFailure, Iterable<TextData>> failureOrTextsData)
+            Either<TextDataFailure, List<TextData>> failureOrTextsData)
         textDataReceived,
   }) =>
       throw _privateConstructorUsedError;
@@ -47,7 +47,7 @@ mixin _$SearchEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String query)? started,
     TResult Function(
-            Either<TextDataFailure, Iterable<TextData>> failureOrTextsData)?
+            Either<TextDataFailure, List<TextData>> failureOrTextsData)?
         textDataReceived,
     required TResult orElse(),
   }) =>
@@ -150,7 +150,7 @@ class _$_SearchEventStarted implements _SearchEventStarted {
   TResult when<TResult extends Object?>({
     required TResult Function(String query) started,
     required TResult Function(
-            Either<TextDataFailure, Iterable<TextData>> failureOrTextsData)
+            Either<TextDataFailure, List<TextData>> failureOrTextsData)
         textDataReceived,
   }) {
     return started(query);
@@ -161,7 +161,7 @@ class _$_SearchEventStarted implements _SearchEventStarted {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String query)? started,
     TResult Function(
-            Either<TextDataFailure, Iterable<TextData>> failureOrTextsData)?
+            Either<TextDataFailure, List<TextData>> failureOrTextsData)?
         textDataReceived,
     required TResult orElse(),
   }) {
@@ -208,7 +208,7 @@ abstract class _$SearchEventReceivedCopyWith<$Res> {
   factory _$SearchEventReceivedCopyWith(_SearchEventReceived value,
           $Res Function(_SearchEventReceived) then) =
       __$SearchEventReceivedCopyWithImpl<$Res>;
-  $Res call({Either<TextDataFailure, Iterable<TextData>> failureOrTextsData});
+  $Res call({Either<TextDataFailure, List<TextData>> failureOrTextsData});
 }
 
 /// @nodoc
@@ -230,7 +230,7 @@ class __$SearchEventReceivedCopyWithImpl<$Res>
       failureOrTextsData == freezed
           ? _value.failureOrTextsData
           : failureOrTextsData // ignore: cast_nullable_to_non_nullable
-              as Either<TextDataFailure, Iterable<TextData>>,
+              as Either<TextDataFailure, List<TextData>>,
     ));
   }
 }
@@ -241,7 +241,7 @@ class _$_SearchEventReceived implements _SearchEventReceived {
   const _$_SearchEventReceived(this.failureOrTextsData);
 
   @override
-  final Either<TextDataFailure, Iterable<TextData>> failureOrTextsData;
+  final Either<TextDataFailure, List<TextData>> failureOrTextsData;
 
   @override
   String toString() {
@@ -273,7 +273,7 @@ class _$_SearchEventReceived implements _SearchEventReceived {
   TResult when<TResult extends Object?>({
     required TResult Function(String query) started,
     required TResult Function(
-            Either<TextDataFailure, Iterable<TextData>> failureOrTextsData)
+            Either<TextDataFailure, List<TextData>> failureOrTextsData)
         textDataReceived,
   }) {
     return textDataReceived(failureOrTextsData);
@@ -284,7 +284,7 @@ class _$_SearchEventReceived implements _SearchEventReceived {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String query)? started,
     TResult Function(
-            Either<TextDataFailure, Iterable<TextData>> failureOrTextsData)?
+            Either<TextDataFailure, List<TextData>> failureOrTextsData)?
         textDataReceived,
     required TResult orElse(),
   }) {
@@ -319,10 +319,10 @@ class _$_SearchEventReceived implements _SearchEventReceived {
 
 abstract class _SearchEventReceived implements SearchEvent {
   const factory _SearchEventReceived(
-          Either<TextDataFailure, Iterable<TextData>> failureOrTextsData) =
+          Either<TextDataFailure, List<TextData>> failureOrTextsData) =
       _$_SearchEventReceived;
 
-  Either<TextDataFailure, Iterable<TextData>> get failureOrTextsData =>
+  Either<TextDataFailure, List<TextData>> get failureOrTextsData =>
       throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$SearchEventReceivedCopyWith<_SearchEventReceived> get copyWith =>

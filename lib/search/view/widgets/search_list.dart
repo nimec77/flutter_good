@@ -17,8 +17,10 @@ class SearchList extends StatelessWidget {
         return textData.maybeMap(
           (value) {
             return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(value.text, textAlign: TextAlign.center, style: theme.textTheme.headline4),
+                const SizedBox(width: 10),
                 Text(value.createData.toString(), textAlign: TextAlign.center, style: theme.textTheme.headline4),
               ],
             );

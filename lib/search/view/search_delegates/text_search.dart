@@ -40,6 +40,8 @@ class TextSearch extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    // Данная фигня из-за бага поисковой панели при сборке под Linux.
+    // При других сборках нужно убрать
     if (prevQuery != query) {
       if (prevQuery.length >= query.length) {
         prevQuery = query;
