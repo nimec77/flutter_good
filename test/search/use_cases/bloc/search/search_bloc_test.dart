@@ -20,6 +20,25 @@ void main() {
     });
 
     blocTest<SearchBloc, SearchState>(
+      'emits [SearchState.searchSuccess] when event SearchEvent.textDataReceived successful',
+      build: () => SearchBloc(mockTextRepository),
+      act: (searchBloc) => searchBloc.add(SearchEvent.textDataReceived(right(searchResult))),
+      expect: () => [
+        SearchState.searchSuccess(searchResult),
+      ],
+    );
+
+    blocTest<SearchBloc, SearchState>(
+      'emits [SearchState.searchFailure] when event SearchEvent.textDataReceived unsuccessful',
+      build: () => SearchBloc(mockTextRepository),
+      act: (searchBloc) =>
+          searchBloc.add(SearchEvent.textDataReceived(left(const TextDataFailure.error('Test error')))),
+      expect: () => [
+        SearchState.searchFailure(searchFailure),
+      ],
+    );
+
+    blocTest<SearchBloc, SearchState>(
       'emits [SearchState.searchInProgress, SearchState.searchSuccess], when successful',
       build: () {
         when(() => mockTextRepository.searchText(any())).thenAnswer((_) => searchStreamResult);
@@ -43,25 +62,6 @@ void main() {
       act: (searchBloc) => searchBloc.add(const SearchEvent.started('query')),
       expect: () => [
         const SearchState.searchInProgress(),
-        SearchState.searchFailure(searchFailure),
-      ],
-    );
-
-    blocTest<SearchBloc, SearchState>(
-      'emits [SearchState.searchSuccess] when event SearchEvent.textDataReceived successful',
-      build: () => SearchBloc(mockTextRepository),
-      act: (searchBloc) => searchBloc.add(SearchEvent.textDataReceived(right(searchResult))),
-      expect: () => [
-        SearchState.searchSuccess(searchResult),
-      ],
-    );
-
-    blocTest<SearchBloc, SearchState>(
-      'emits [SearchState.searchFailure] when event SearchEvent.textDataReceived unsuccessful',
-      build: () => SearchBloc(mockTextRepository),
-      act: (searchBloc) =>
-          searchBloc.add(SearchEvent.textDataReceived(left(const TextDataFailure.error('Test error')))),
-      expect: () => [
         SearchState.searchFailure(searchFailure),
       ],
     );
