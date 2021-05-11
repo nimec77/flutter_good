@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_good/search/view/widgets/search_history.dart';
 import 'package:flutter_good/search/view/widgets/search_results_list_view.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
@@ -39,58 +39,69 @@ class _RecoSearchPageState extends State<RecoSearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FloatingSearchBarScrollNotifier(
-        child: FloatingSearchBar(
-          actions: [
-            FloatingSearchBarAction.searchToClear(),
-          ],
-          controller: controller,
-          transition: CircularFloatingSearchBarTransition(),
-          physics: const BouncingScrollPhysics(),
-          title: Text(
-            selectedTerm.isEmpty ? 'The Search App' : selectedTerm,
-            style: Theme.of(context).textTheme.headline6,
-          ),
-          hint: 'Search and find out...',
-          body: SearchResultListView(
+      body: FloatingSearchBar(
+        actions: [
+          FloatingSearchBarAction.searchToClear(),
+        ],
+        controller: controller,
+        transition: CircularFloatingSearchBarTransition(),
+        physics: const BouncingScrollPhysics(),
+        title: Text(
+          selectedTerm.isEmpty ? 'The Search App' : selectedTerm,
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        hint: 'Search and find out...',
+        body: FloatingSearchBarScrollNotifier(
+          child: SearchResultListView(
             searchTerm: selectedTerm,
           ),
-          onQueryChanged: (query) {
-            // if (Platform.isLinux) {
-            //   if (_lastLength < query.length) {
-            //     final char = query[0];
-            //     query = query.substring(1) + char;
-            //     // controller.query = query;
-            //   } else {
-            //     query = utf8.decode(query.codeUnits.reversed.toList());
-            //   }
-            // }
-            debugPrint('changed:$query');
-            setState(() {
-              filteredSearchHistory = filterSearchTerms(query);
-            });
-          },
-          onSubmitted: (query) {
-            debugPrint('submitted:$query');
-            setState(() {
-              addSearchTerm(query);
-              selectedTerm = query;
-            });
-            controller.close();
-          },
-          builder: (BuildContext context, Animation<double> transition) {
-            return ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: const Material(
-                color: Colors.white,
-                elevation: 4,
-                child: Placeholder(
-                  fallbackHeight: 200,
-                ),
-              ),
-            );
-          },
         ),
+        onQueryChanged: (query) {
+          debugPrint('changed:$query');
+          setState(() {
+            filteredSearchHistory = filterSearchTerms(query);
+          });
+        },
+        onSubmitted: (query) {
+          debugPrint('submitted:$query');
+          setState(() {
+            addSearchTerm(query);
+            selectedTerm = query;
+          });
+          controller.close();
+        },
+        builder: (BuildContext context, Animation<double> transition) {
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Material(
+              color: Colors.white,
+              elevation: 4,
+              child: SearchHistory(
+                history: filteredSearchHistory,
+                query: controller.query,
+                onAddTap: () {
+                  setState(() {
+                    addSearchTerm(controller.query);
+                    selectedTerm = controller.query;
+                  });
+                  controller.close();
+                },
+                onSelectTap: (term) {
+                  setState(() {
+                    putSearchTermFirst(term);
+                    selectedTerm = term;
+                  });
+                  controller.close();
+                },
+                onPressed: (term) {
+                  setState(() {
+                    deleteSearchTerm(term);
+                  });
+                },
+              ),
+            ),
+          );
+        },
       ),
     );
   }
