@@ -1,5 +1,6 @@
 
 export 'data/repositories/reso_repository_imp.dart';
+export 'data/repositories/search_history_repository_imp.dart';
 export 'data/repositories/text_repository_imp.dart';
 export 'domain/entities/text/text_data.dart';
 export 'domain/entities/text/text_data_failure.dart';

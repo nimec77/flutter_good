@@ -1,20 +1,30 @@
 import 'package:flutter_good/search/use_cases/ports/search_history_repository.dart';
 
 class SearchHistoryRepositoryImp implements SearchHistoryRepository {
-  SearchHistoryRepositoryImp({this.history = const [], this.maxHistoryLength = 5});
+  SearchHistoryRepositoryImp({List<String> history = const [], this.maxHistoryLength = 5}) {
+    _history = _removeUnnecessary(history, maxHistoryLength);
+  }
 
   final int maxHistoryLength;
-  final List<String> history;
+  late final List<String> _history;
+
+  List<String> _removeUnnecessary(List<String> list, int max) {
+    if (list.length <= max) {
+      return list;
+    }
+
+    return [...list]..removeRange(0, list.length - max);
+  }
 
   @override
   List<String> addSearchTerm(String term) {
-    if (history.contains(term)) {
+    if (_history.contains(term)) {
       return putSearchTermFirst(term);
     }
 
-    history.add(term);
-    if (history.length > maxHistoryLength) {
-      history.removeRange(0, history.length - maxHistoryLength);
+    _history.add(term);
+    if (_history.length > maxHistoryLength) {
+      _history.removeRange(0, _history.length - maxHistoryLength);
     }
 
     return filterSearchTerms('');
@@ -22,7 +32,7 @@ class SearchHistoryRepositoryImp implements SearchHistoryRepository {
 
   @override
   List<String> deleteSearchTerm(String term) {
-    history.remove(term);
+    _history.remove(term);
 
     return filterSearchTerms('');
   }
@@ -30,10 +40,10 @@ class SearchHistoryRepositoryImp implements SearchHistoryRepository {
   @override
   List<String> filterSearchTerms(String filter) {
     if (filter.isNotEmpty) {
-      return history.reversed.where((term) => term.startsWith(filter)).toList();
+      return _history.reversed.where((term) => term.startsWith(filter)).toList();
     }
 
-    return history.reversed.toList();
+    return _history.reversed.toList();
   }
 
   @override
