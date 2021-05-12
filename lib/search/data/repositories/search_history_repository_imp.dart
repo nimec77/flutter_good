@@ -6,7 +6,7 @@ class SearchHistoryRepositoryImp implements SearchHistoryRepository {
   }
 
   final int maxHistoryLength;
-  late final List<String> _history;
+  late List<String> _history;
 
   List<String> _removeUnnecessary(List<String> list, int max) {
     if (list.length <= max) {
@@ -23,9 +23,7 @@ class SearchHistoryRepositoryImp implements SearchHistoryRepository {
     }
 
     _history.add(term);
-    if (_history.length > maxHistoryLength) {
-      _history.removeRange(0, _history.length - maxHistoryLength);
-    }
+    _history = _removeUnnecessary(_history, maxHistoryLength);
 
     return filterSearchTerms('');
   }
@@ -40,7 +38,7 @@ class SearchHistoryRepositoryImp implements SearchHistoryRepository {
   @override
   List<String> filterSearchTerms(String filter) {
     if (filter.isNotEmpty) {
-      return _history.reversed.where((term) => term.startsWith(filter)).toList();
+      return _history.reversed.where((term) => term.contains(filter)).toList();
     }
 
     return _history.reversed.toList();
