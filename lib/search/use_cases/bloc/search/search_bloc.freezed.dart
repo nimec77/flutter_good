@@ -16,15 +16,15 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$SearchEventTearOff {
   const _$SearchEventTearOff();
 
-  _SearchEventStarted started(String query) {
-    return _SearchEventStarted(
+  SearchEventStarted started(String query) {
+    return SearchEventStarted(
       query,
     );
   }
 
-  _SearchEventReceived textDataReceived(
+  SearchEventReceived textDataReceived(
       Either<TextDataFailure, List<TextData>> failureOrTextsData) {
-    return _SearchEventReceived(
+    return SearchEventReceived(
       failureOrTextsData,
     );
   }
@@ -54,14 +54,14 @@ mixin _$SearchEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SearchEventStarted value) started,
-    required TResult Function(_SearchEventReceived value) textDataReceived,
+    required TResult Function(SearchEventStarted value) started,
+    required TResult Function(SearchEventReceived value) textDataReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SearchEventStarted value)? started,
-    TResult Function(_SearchEventReceived value)? textDataReceived,
+    TResult Function(SearchEventStarted value)? started,
+    TResult Function(SearchEventReceived value)? textDataReceived,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -84,29 +84,29 @@ class _$SearchEventCopyWithImpl<$Res> implements $SearchEventCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$SearchEventStartedCopyWith<$Res> {
-  factory _$SearchEventStartedCopyWith(
-          _SearchEventStarted value, $Res Function(_SearchEventStarted) then) =
-      __$SearchEventStartedCopyWithImpl<$Res>;
+abstract class $SearchEventStartedCopyWith<$Res> {
+  factory $SearchEventStartedCopyWith(
+          SearchEventStarted value, $Res Function(SearchEventStarted) then) =
+      _$SearchEventStartedCopyWithImpl<$Res>;
   $Res call({String query});
 }
 
 /// @nodoc
-class __$SearchEventStartedCopyWithImpl<$Res>
+class _$SearchEventStartedCopyWithImpl<$Res>
     extends _$SearchEventCopyWithImpl<$Res>
-    implements _$SearchEventStartedCopyWith<$Res> {
-  __$SearchEventStartedCopyWithImpl(
-      _SearchEventStarted _value, $Res Function(_SearchEventStarted) _then)
-      : super(_value, (v) => _then(v as _SearchEventStarted));
+    implements $SearchEventStartedCopyWith<$Res> {
+  _$SearchEventStartedCopyWithImpl(
+      SearchEventStarted _value, $Res Function(SearchEventStarted) _then)
+      : super(_value, (v) => _then(v as SearchEventStarted));
 
   @override
-  _SearchEventStarted get _value => super._value as _SearchEventStarted;
+  SearchEventStarted get _value => super._value as SearchEventStarted;
 
   @override
   $Res call({
     Object? query = freezed,
   }) {
-    return _then(_SearchEventStarted(
+    return _then(SearchEventStarted(
       query == freezed
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
@@ -117,8 +117,8 @@ class __$SearchEventStartedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SearchEventStarted implements _SearchEventStarted {
-  const _$_SearchEventStarted(this.query);
+class _$SearchEventStarted implements SearchEventStarted {
+  const _$SearchEventStarted(this.query);
 
   @override
   final String query;
@@ -131,7 +131,7 @@ class _$_SearchEventStarted implements _SearchEventStarted {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _SearchEventStarted &&
+        (other is SearchEventStarted &&
             (identical(other.query, query) ||
                 const DeepCollectionEquality().equals(other.query, query)));
   }
@@ -142,8 +142,8 @@ class _$_SearchEventStarted implements _SearchEventStarted {
 
   @JsonKey(ignore: true)
   @override
-  _$SearchEventStartedCopyWith<_SearchEventStarted> get copyWith =>
-      __$SearchEventStartedCopyWithImpl<_SearchEventStarted>(this, _$identity);
+  $SearchEventStartedCopyWith<SearchEventStarted> get copyWith =>
+      _$SearchEventStartedCopyWithImpl<SearchEventStarted>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -174,8 +174,8 @@ class _$_SearchEventStarted implements _SearchEventStarted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SearchEventStarted value) started,
-    required TResult Function(_SearchEventReceived value) textDataReceived,
+    required TResult Function(SearchEventStarted value) started,
+    required TResult Function(SearchEventReceived value) textDataReceived,
   }) {
     return started(this);
   }
@@ -183,8 +183,8 @@ class _$_SearchEventStarted implements _SearchEventStarted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SearchEventStarted value)? started,
-    TResult Function(_SearchEventReceived value)? textDataReceived,
+    TResult Function(SearchEventStarted value)? started,
+    TResult Function(SearchEventReceived value)? textDataReceived,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -194,39 +194,39 @@ class _$_SearchEventStarted implements _SearchEventStarted {
   }
 }
 
-abstract class _SearchEventStarted implements SearchEvent {
-  const factory _SearchEventStarted(String query) = _$_SearchEventStarted;
+abstract class SearchEventStarted implements SearchEvent {
+  const factory SearchEventStarted(String query) = _$SearchEventStarted;
 
   String get query => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$SearchEventStartedCopyWith<_SearchEventStarted> get copyWith =>
+  $SearchEventStartedCopyWith<SearchEventStarted> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$SearchEventReceivedCopyWith<$Res> {
-  factory _$SearchEventReceivedCopyWith(_SearchEventReceived value,
-          $Res Function(_SearchEventReceived) then) =
-      __$SearchEventReceivedCopyWithImpl<$Res>;
+abstract class $SearchEventReceivedCopyWith<$Res> {
+  factory $SearchEventReceivedCopyWith(
+          SearchEventReceived value, $Res Function(SearchEventReceived) then) =
+      _$SearchEventReceivedCopyWithImpl<$Res>;
   $Res call({Either<TextDataFailure, List<TextData>> failureOrTextsData});
 }
 
 /// @nodoc
-class __$SearchEventReceivedCopyWithImpl<$Res>
+class _$SearchEventReceivedCopyWithImpl<$Res>
     extends _$SearchEventCopyWithImpl<$Res>
-    implements _$SearchEventReceivedCopyWith<$Res> {
-  __$SearchEventReceivedCopyWithImpl(
-      _SearchEventReceived _value, $Res Function(_SearchEventReceived) _then)
-      : super(_value, (v) => _then(v as _SearchEventReceived));
+    implements $SearchEventReceivedCopyWith<$Res> {
+  _$SearchEventReceivedCopyWithImpl(
+      SearchEventReceived _value, $Res Function(SearchEventReceived) _then)
+      : super(_value, (v) => _then(v as SearchEventReceived));
 
   @override
-  _SearchEventReceived get _value => super._value as _SearchEventReceived;
+  SearchEventReceived get _value => super._value as SearchEventReceived;
 
   @override
   $Res call({
     Object? failureOrTextsData = freezed,
   }) {
-    return _then(_SearchEventReceived(
+    return _then(SearchEventReceived(
       failureOrTextsData == freezed
           ? _value.failureOrTextsData
           : failureOrTextsData // ignore: cast_nullable_to_non_nullable
@@ -237,8 +237,8 @@ class __$SearchEventReceivedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SearchEventReceived implements _SearchEventReceived {
-  const _$_SearchEventReceived(this.failureOrTextsData);
+class _$SearchEventReceived implements SearchEventReceived {
+  const _$SearchEventReceived(this.failureOrTextsData);
 
   @override
   final Either<TextDataFailure, List<TextData>> failureOrTextsData;
@@ -251,7 +251,7 @@ class _$_SearchEventReceived implements _SearchEventReceived {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _SearchEventReceived &&
+        (other is SearchEventReceived &&
             (identical(other.failureOrTextsData, failureOrTextsData) ||
                 const DeepCollectionEquality()
                     .equals(other.failureOrTextsData, failureOrTextsData)));
@@ -264,9 +264,8 @@ class _$_SearchEventReceived implements _SearchEventReceived {
 
   @JsonKey(ignore: true)
   @override
-  _$SearchEventReceivedCopyWith<_SearchEventReceived> get copyWith =>
-      __$SearchEventReceivedCopyWithImpl<_SearchEventReceived>(
-          this, _$identity);
+  $SearchEventReceivedCopyWith<SearchEventReceived> get copyWith =>
+      _$SearchEventReceivedCopyWithImpl<SearchEventReceived>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -297,8 +296,8 @@ class _$_SearchEventReceived implements _SearchEventReceived {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_SearchEventStarted value) started,
-    required TResult Function(_SearchEventReceived value) textDataReceived,
+    required TResult Function(SearchEventStarted value) started,
+    required TResult Function(SearchEventReceived value) textDataReceived,
   }) {
     return textDataReceived(this);
   }
@@ -306,8 +305,8 @@ class _$_SearchEventReceived implements _SearchEventReceived {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_SearchEventStarted value)? started,
-    TResult Function(_SearchEventReceived value)? textDataReceived,
+    TResult Function(SearchEventStarted value)? started,
+    TResult Function(SearchEventReceived value)? textDataReceived,
     required TResult orElse(),
   }) {
     if (textDataReceived != null) {
@@ -317,15 +316,15 @@ class _$_SearchEventReceived implements _SearchEventReceived {
   }
 }
 
-abstract class _SearchEventReceived implements SearchEvent {
-  const factory _SearchEventReceived(
+abstract class SearchEventReceived implements SearchEvent {
+  const factory SearchEventReceived(
           Either<TextDataFailure, List<TextData>> failureOrTextsData) =
-      _$_SearchEventReceived;
+      _$SearchEventReceived;
 
   Either<TextDataFailure, List<TextData>> get failureOrTextsData =>
       throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$SearchEventReceivedCopyWith<_SearchEventReceived> get copyWith =>
+  $SearchEventReceivedCopyWith<SearchEventReceived> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

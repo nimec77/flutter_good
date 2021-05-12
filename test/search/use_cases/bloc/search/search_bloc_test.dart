@@ -41,7 +41,7 @@ void main() {
     blocTest<SearchBloc, SearchState>(
       'emits [SearchState.searchInProgress, SearchState.searchSuccess], when successful',
       build: () {
-        when(() => mockTextRepository.searchText(any())).thenAnswer((_) => searchStreamResult);
+        when(() => mockTextRepository.search(any())).thenAnswer((_) => searchStreamResult);
 
         return SearchBloc(mockTextRepository);
       },
@@ -55,7 +55,7 @@ void main() {
     blocTest<SearchBloc, SearchState>(
       'emits [SearchState.searchInProgress, SearchState.failure] when unsuccessful',
       build: () {
-        when(() => mockTextRepository.searchText(any())).thenAnswer((_) => searchStreamFailure);
+        when(() => mockTextRepository.search(any())).thenAnswer((_) => searchStreamFailure);
 
         return SearchBloc(mockTextRepository);
       },

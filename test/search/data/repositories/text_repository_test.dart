@@ -8,7 +8,7 @@ void main() {
 
   group('Test TextRepository', () {
     test('should return a iterable of one TextData', () async {
-      final result = textRepository.searchText('');
+      final result = textRepository.search('');
       final streamQueue = StreamQueue<Either<TextDataFailure, Iterable<TextData>>>(result);
       final first = await streamQueue.next;
       first.fold(

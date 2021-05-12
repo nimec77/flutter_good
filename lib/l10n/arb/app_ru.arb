@@ -7,5 +7,14 @@
   "searchAppBarTitle": "Поиск",
   "@searchAppBarTitle": {
     "description": "Текст показывается на AppBar в Search Page"
+  },
+  "searchAppBarHint": "Ищи и узнай ....",
+  "@searchAppBarHint": {
+    "description": "Текст показывается как подсказка в поисковой панели"
+  },
+  "searchAppBarUnknownError": "Неизвестная ошибка",
+  "@searchAppBarUnknownError": {
+    "description": "Текст показывается когда произошла неизвестная ошибка"
   }
+
 }

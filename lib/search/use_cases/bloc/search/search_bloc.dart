@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_good/search/domain/entities/text/text_data.dart';
 import 'package:flutter_good/search/domain/entities/text/text_data_failure.dart';
+import 'package:flutter_good/search/use_cases/enums/error_types.dart';
 import 'package:flutter_good/search/use_cases/ports/text_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
@@ -44,7 +45,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   Stream<SearchState> _mapStartedEventToState(String query) async* {
     yield const SearchState.searchInProgress();
     await _textDataStreamSubscription?.cancel();
-    _textDataStreamSubscription = textRepository.searchText(query).listen((failureOrTextsData) {
+    _textDataStreamSubscription =
+        textRepository.search(query, errorTypes: ErrorTypes.noError).listen((failureOrTextsData) {
       add(SearchEvent.textDataReceived(failureOrTextsData));
     });
   }

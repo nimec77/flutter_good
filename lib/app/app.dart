@@ -28,7 +28,7 @@ class App extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       // supportedLocales: const [Locale('ru', '')],
       home: BlocProvider<SearchBloc>(
-        create: (context) => SearchBloc(TextRepositoryImp())..add(const SearchEvent.started('')),
+        create: (context) => SearchBloc(ResoRepositoryImp())..add(const SearchEvent.started('')),
         child: SearchPage(),
       ),
     );

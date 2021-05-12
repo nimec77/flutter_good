@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_good/search/domain/entities/text/text_data.dart';
 import 'package:flutter_good/search/domain/entities/text/text_data_failure.dart';
+import 'package:flutter_good/search/use_cases/enums/error_types.dart';
 import 'package:flutter_good/search/use_cases/ports/text_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -12,7 +13,7 @@ class TextRepositoryImp implements TextRepository {
   final random = Random();
 
   @override
-  Stream<Either<TextDataFailure, List<TextData>>> searchText(String query) {
+  Stream<Either<TextDataFailure, List<TextData>>> search(String query, {ErrorTypes errorTypes = ErrorTypes.noError}) {
     return _searchText$(query)
         .map((textsData) => random.nextBool()
             ? right<TextDataFailure, List<TextData>>(textsData)

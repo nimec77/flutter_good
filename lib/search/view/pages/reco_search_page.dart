@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_good/search/view/widgets/search_history.dart';
 import 'package:flutter_good/search/view/widgets/search_results_list_view.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:flutter_good/l10n/l10n.dart';
 
 class RecoSearchPage extends StatefulWidget {
   const RecoSearchPage({Key? key}) : super(key: key);
@@ -25,7 +26,6 @@ class _RecoSearchPageState extends State<RecoSearchPage> {
   @override
   void initState() {
     super.initState();
-    filteredSearchHistory = filterSearchTerms('');
     controller = FloatingSearchBarController();
     filteredSearchHistory = filterSearchTerms('');
   }
@@ -38,7 +38,11 @@ class _RecoSearchPageState extends State<RecoSearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Scaffold(
+      appBar: AppBar(
+        title: Text(l10n.searchAppBarTitle),
+      ),
       body: FloatingSearchBar(
         actions: [
           FloatingSearchBarAction.searchToClear(),

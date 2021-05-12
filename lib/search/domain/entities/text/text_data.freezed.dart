@@ -16,15 +16,15 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$TextDataTearOff {
   const _$TextDataTearOff();
 
-  _TextData call(String text, DateTime createData) {
-    return _TextData(
+  TextDataValue call(String text, DateTime createData) {
+    return TextDataValue(
       text,
       createData,
     );
   }
 
-  _TextDataEmpty empty() {
-    return const _TextDataEmpty();
+  TextDataEmpty empty() {
+    return const TextDataEmpty();
   }
 }
 
@@ -48,14 +48,14 @@ mixin _$TextData {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_TextData value) $default, {
-    required TResult Function(_TextDataEmpty value) empty,
+    TResult Function(TextDataValue value) $default, {
+    required TResult Function(TextDataEmpty value) empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_TextData value)? $default, {
-    TResult Function(_TextDataEmpty value)? empty,
+    TResult Function(TextDataValue value)? $default, {
+    TResult Function(TextDataEmpty value)? empty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -77,27 +77,29 @@ class _$TextDataCopyWithImpl<$Res> implements $TextDataCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$TextDataCopyWith<$Res> {
-  factory _$TextDataCopyWith(_TextData value, $Res Function(_TextData) then) =
-      __$TextDataCopyWithImpl<$Res>;
+abstract class $TextDataValueCopyWith<$Res> {
+  factory $TextDataValueCopyWith(
+          TextDataValue value, $Res Function(TextDataValue) then) =
+      _$TextDataValueCopyWithImpl<$Res>;
   $Res call({String text, DateTime createData});
 }
 
 /// @nodoc
-class __$TextDataCopyWithImpl<$Res> extends _$TextDataCopyWithImpl<$Res>
-    implements _$TextDataCopyWith<$Res> {
-  __$TextDataCopyWithImpl(_TextData _value, $Res Function(_TextData) _then)
-      : super(_value, (v) => _then(v as _TextData));
+class _$TextDataValueCopyWithImpl<$Res> extends _$TextDataCopyWithImpl<$Res>
+    implements $TextDataValueCopyWith<$Res> {
+  _$TextDataValueCopyWithImpl(
+      TextDataValue _value, $Res Function(TextDataValue) _then)
+      : super(_value, (v) => _then(v as TextDataValue));
 
   @override
-  _TextData get _value => super._value as _TextData;
+  TextDataValue get _value => super._value as TextDataValue;
 
   @override
   $Res call({
     Object? text = freezed,
     Object? createData = freezed,
   }) {
-    return _then(_TextData(
+    return _then(TextDataValue(
       text == freezed
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -112,8 +114,8 @@ class __$TextDataCopyWithImpl<$Res> extends _$TextDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TextData implements _TextData {
-  const _$_TextData(this.text, this.createData);
+class _$TextDataValue implements TextDataValue {
+  const _$TextDataValue(this.text, this.createData);
 
   @override
   final String text;
@@ -128,7 +130,7 @@ class _$_TextData implements _TextData {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _TextData &&
+        (other is TextDataValue &&
             (identical(other.text, text) ||
                 const DeepCollectionEquality().equals(other.text, text)) &&
             (identical(other.createData, createData) ||
@@ -144,8 +146,8 @@ class _$_TextData implements _TextData {
 
   @JsonKey(ignore: true)
   @override
-  _$TextDataCopyWith<_TextData> get copyWith =>
-      __$TextDataCopyWithImpl<_TextData>(this, _$identity);
+  $TextDataValueCopyWith<TextDataValue> get copyWith =>
+      _$TextDataValueCopyWithImpl<TextDataValue>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -172,8 +174,8 @@ class _$_TextData implements _TextData {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_TextData value) $default, {
-    required TResult Function(_TextDataEmpty value) empty,
+    TResult Function(TextDataValue value) $default, {
+    required TResult Function(TextDataEmpty value) empty,
   }) {
     return $default(this);
   }
@@ -181,8 +183,8 @@ class _$_TextData implements _TextData {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_TextData value)? $default, {
-    TResult Function(_TextDataEmpty value)? empty,
+    TResult Function(TextDataValue value)? $default, {
+    TResult Function(TextDataEmpty value)? empty,
     required TResult orElse(),
   }) {
     if ($default != null) {
@@ -192,38 +194,39 @@ class _$_TextData implements _TextData {
   }
 }
 
-abstract class _TextData implements TextData {
-  const factory _TextData(String text, DateTime createData) = _$_TextData;
+abstract class TextDataValue implements TextData {
+  const factory TextDataValue(String text, DateTime createData) =
+      _$TextDataValue;
 
   String get text => throw _privateConstructorUsedError;
   DateTime get createData => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$TextDataCopyWith<_TextData> get copyWith =>
+  $TextDataValueCopyWith<TextDataValue> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$TextDataEmptyCopyWith<$Res> {
-  factory _$TextDataEmptyCopyWith(
-          _TextDataEmpty value, $Res Function(_TextDataEmpty) then) =
-      __$TextDataEmptyCopyWithImpl<$Res>;
+abstract class $TextDataEmptyCopyWith<$Res> {
+  factory $TextDataEmptyCopyWith(
+          TextDataEmpty value, $Res Function(TextDataEmpty) then) =
+      _$TextDataEmptyCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$TextDataEmptyCopyWithImpl<$Res> extends _$TextDataCopyWithImpl<$Res>
-    implements _$TextDataEmptyCopyWith<$Res> {
-  __$TextDataEmptyCopyWithImpl(
-      _TextDataEmpty _value, $Res Function(_TextDataEmpty) _then)
-      : super(_value, (v) => _then(v as _TextDataEmpty));
+class _$TextDataEmptyCopyWithImpl<$Res> extends _$TextDataCopyWithImpl<$Res>
+    implements $TextDataEmptyCopyWith<$Res> {
+  _$TextDataEmptyCopyWithImpl(
+      TextDataEmpty _value, $Res Function(TextDataEmpty) _then)
+      : super(_value, (v) => _then(v as TextDataEmpty));
 
   @override
-  _TextDataEmpty get _value => super._value as _TextDataEmpty;
+  TextDataEmpty get _value => super._value as TextDataEmpty;
 }
 
 /// @nodoc
 
-class _$_TextDataEmpty implements _TextDataEmpty {
-  const _$_TextDataEmpty();
+class _$TextDataEmpty implements TextDataEmpty {
+  const _$TextDataEmpty();
 
   @override
   String toString() {
@@ -232,7 +235,7 @@ class _$_TextDataEmpty implements _TextDataEmpty {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _TextDataEmpty);
+    return identical(this, other) || (other is TextDataEmpty);
   }
 
   @override
@@ -263,8 +266,8 @@ class _$_TextDataEmpty implements _TextDataEmpty {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_TextData value) $default, {
-    required TResult Function(_TextDataEmpty value) empty,
+    TResult Function(TextDataValue value) $default, {
+    required TResult Function(TextDataEmpty value) empty,
   }) {
     return empty(this);
   }
@@ -272,8 +275,8 @@ class _$_TextDataEmpty implements _TextDataEmpty {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_TextData value)? $default, {
-    TResult Function(_TextDataEmpty value)? empty,
+    TResult Function(TextDataValue value)? $default, {
+    TResult Function(TextDataEmpty value)? empty,
     required TResult orElse(),
   }) {
     if (empty != null) {
@@ -283,6 +286,6 @@ class _$_TextDataEmpty implements _TextDataEmpty {
   }
 }
 
-abstract class _TextDataEmpty implements TextData {
-  const factory _TextDataEmpty() = _$_TextDataEmpty;
+abstract class TextDataEmpty implements TextData {
+  const factory TextDataEmpty() = _$TextDataEmpty;
 }

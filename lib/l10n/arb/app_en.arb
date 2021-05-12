@@ -7,5 +7,13 @@
     "searchAppBarTitle": "Search",
     "@searchAppBarTitle": {
         "description": "Text shown in the AppBar of the Search Page"
+    },
+    "searchAppBarHint": "Search and find out...",
+    "@searchAppBarHint": {
+        "description": "Text shown as a hint int the search bar"
+    },
+    "searchAppBarUnknownError": "Unknown error",
+    "@searchAppBarUnknownError": {
+        "description": "Text shown when an unknown error has occurred"
     }
 }
