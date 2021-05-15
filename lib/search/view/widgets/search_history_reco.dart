@@ -1,54 +1,55 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_good/l10n/l10n.dart';
 
-class SearchHistory extends StatelessWidget {
-  const SearchHistory({
+typedef OnHistoryPressed = void Function(String query);
+
+class SearchHistoryReco extends StatelessWidget {
+  const SearchHistoryReco({
     Key? key,
-    required this.histories,
+    required this.history,
     required this.query,
-    this.onAdd,
-    this.onSelect,
-    this.onDelete,
+    this.onAddTap,
+    this.onSelectTap,
+    this.onPressed,
   }) : super(key: key);
 
-  final List<String> histories;
+  final List<String> history;
   final String query;
-  final VoidCallback? onAdd;
-  final ValueChanged? onSelect;
-  final ValueChanged? onDelete;
+  final VoidCallback? onAddTap;
+  final OnHistoryPressed? onSelectTap;
+  final OnHistoryPressed? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    if (histories.isEmpty && query.isEmpty) {
+    if (history.isEmpty && query.isEmpty) {
       return Container(
         height: 56,
         width: double.infinity,
         alignment: Alignment.center,
         child: Text(
-          l10n.searchAppStartSearch,
+          'Start searching',
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: Theme.of(context).textTheme.caption,
         ),
       );
-    } else if (histories.isEmpty) {
+    } else if (history.isEmpty) {
       return ListTile(
         title: Text(query),
         leading: const Icon(Icons.search),
-        onTap: onAdd,
+        onTap: onAddTap,
       );
     }
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: histories
+      children: history
           .map((term) => ListTile(
                 title: Text(term, maxLines: 1, overflow: TextOverflow.ellipsis),
+                leading: const Icon(Icons.history),
                 trailing: IconButton(
                   icon: const Icon(Icons.clear),
-                  onPressed: () => onDelete?.call(term),
+                  onPressed: onPressed != null ? () => onPressed!(term) : null,
                 ),
-                onTap: () => onSelect?.call(term),
+                onTap: onSelectTap != null ? () => onSelectTap!(term) : null,
               ))
           .toList(),
     );

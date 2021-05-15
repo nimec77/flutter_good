@@ -15,5 +15,9 @@
     "searchAppBarUnknownError": "Unknown error",
     "@searchAppBarUnknownError": {
         "description": "Text shown when an unknown error has occurred"
+    },
+    "searchAppStartSearch": "Start search",
+    "@searchAppStartSearch": {
+        "description": "Text shown when search bar is empty"
     }
 }

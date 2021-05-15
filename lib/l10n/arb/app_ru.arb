@@ -15,6 +15,10 @@
   "searchAppBarUnknownError": "Неизвестная ошибка",
   "@searchAppBarUnknownError": {
     "description": "Текст показывается когда произошла неизвестная ошибка"
+  },
+  "searchAppStartSearch": "Поиск",
+  "@searchAppStartSearch": {
+    "description": "Текст показывается когда поисковая панель пустая"
   }
 
 }

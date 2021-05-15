@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_good/l10n/l10n.dart';
 import 'package:flutter_good/search/search.dart';
-import 'package:flutter_good/search/view/widgets/progress_bar.dart';
+import 'package:flutter_good/search/use_cases/bloc/history/history_bloc.dart';
+import 'package:flutter_good/search/view/common_widgets/progress_bar.dart';
+import 'package:flutter_good/search/view/widgets/search_history.dart';
 import 'package:flutter_good/search/view/widgets/search_list.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
@@ -77,7 +79,34 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
         builder: (context, transition) {
-          return Container();
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Material(
+              color: Colors.white,
+              elevation: 4,
+              child: BlocBuilder<HistoryBloc, HistoryState>(
+                builder: (context, state) {
+                  final historyBloc = context.read<HistoryBloc>();
+                  return state.when(
+                    initial: () => const SearchHistory(histories: [], query: ''),
+                    termsFiltered: (terms) => SearchHistory(
+                      histories: terms,
+                      query: controller.query,
+                      onAdd: () {
+                        historyBloc.add(HistoryEvent.added(controller.query));
+                      },
+                      onDelete: (term) {
+                        historyBloc.add(HistoryEvent.deleted(term));
+                      },
+                      onSelect: (term) {
+                        historyBloc.add(HistoryEvent.selected(term));
+                      },
+                    ),
+                  );
+                },
+              ),
+            ),
+          );
         },
       ),
     );
