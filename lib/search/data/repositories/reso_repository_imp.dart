@@ -42,7 +42,7 @@ class ResoRepositoryImp implements TextRepository {
   }
 
   Iterable<TextData> _search(String query) {
-    final length = random.nextInt(50);
+    final length = random.nextInt(10);
     return List.generate(length, (index) => TextData('$query search result #${index + 1}/$length', DateTime.now()));
   }
 }

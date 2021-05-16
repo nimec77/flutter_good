@@ -1,4 +1,4 @@
-abstract class SearchHistoryRepository {
+abstract class HistoryRepository {
   List<String> filterSearchTerms(String filter);
 
   List<String> addSearchTerm(String term);

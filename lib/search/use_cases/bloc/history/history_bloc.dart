@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter_good/search/use_cases/ports/search_history_repository.dart';
+import 'package:flutter_good/search/use_cases/ports/history_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'history_event.dart';
@@ -11,9 +11,9 @@ part 'history_state.dart';
 part 'history_bloc.freezed.dart';
 
 class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
-  HistoryBloc(this.searchHistoryRepository) : super(const HistoryState.initial());
+  HistoryBloc(this.historyRepository) : super(const HistoryState.initial());
 
-  final SearchHistoryRepository searchHistoryRepository;
+  final HistoryRepository historyRepository;
 
   @override
   Stream<HistoryState> mapEventToState(
@@ -36,18 +36,18 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
   }
 
   Stream<HistoryState> _mapAddedEventToState(String term) async* {
-    yield HistoryState.termsFiltered(searchHistoryRepository.addSearchTerm(term));
+    yield HistoryState.termsFiltered(term: term, history: historyRepository.addSearchTerm(term));
   }
 
   Stream<HistoryState> _mapDeletedEventToState(String term) async* {
-    yield HistoryState.termsFiltered(searchHistoryRepository.deleteSearchTerm(term));
+    yield HistoryState.termsFiltered(term: '', history: historyRepository.deleteSearchTerm(term));
   }
 
   Stream<HistoryState> _mapSelectedEventToState(String term) async* {
-    yield HistoryState.termsFiltered(searchHistoryRepository.putSearchTermFirst(term));
+    yield HistoryState.termsFiltered(term: term, history: historyRepository.putSearchTermFirst(term));
   }
   
   Stream<HistoryState> _mapChangedEventToState(String filter) async* {
-    yield HistoryState.termsFiltered(searchHistoryRepository.filterSearchTerms(filter));
+    yield HistoryState.termsFiltered(term: filter, history: historyRepository.filterSearchTerms(filter));
   }
 }

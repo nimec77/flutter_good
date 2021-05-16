@@ -1,7 +1,7 @@
-import 'package:flutter_good/search/use_cases/ports/search_history_repository.dart';
+import 'package:flutter_good/search/use_cases/ports/history_repository.dart';
 
-class SearchHistoryRepositoryImp implements SearchHistoryRepository {
-  SearchHistoryRepositoryImp({List<String> history = const [], this.maxHistoryLength = 5}) {
+class HistoryRepositoryImp implements HistoryRepository {
+  HistoryRepositoryImp({List<String> history = const [], this.maxHistoryLength = 5}) {
     _history = _removeUnnecessary(history, maxHistoryLength);
   }
 
@@ -10,7 +10,7 @@ class SearchHistoryRepositoryImp implements SearchHistoryRepository {
 
   List<String> _removeUnnecessary(List<String> list, int max) {
     if (list.length <= max) {
-      return list;
+      return [...list];
     }
 
     return [...list]..removeRange(0, list.length - max);

@@ -8,7 +8,7 @@ import 'package:mocktail/mocktail.dart';
 class MockTextRepository extends Mock implements TextRepository {}
 
 void main() {
-  group('SearchBloc', () {
+  group('SearchBloc tests', () {
     final mockTextRepository = MockTextRepository();
     final searchResult = [TextData('Text 0', DateTime.now())];
     final searchStreamResult = Stream<Either<TextDataFailure, List<TextData>>>.value(right(searchResult));
@@ -39,18 +39,20 @@ void main() {
     );
 
     blocTest<SearchBloc, SearchState>(
-      'emits [SearchState.searchInProgress, SearchState.searchSuccess], when successful',
-      build: () {
-        when(() => mockTextRepository.search(any())).thenAnswer((_) => searchStreamResult);
+        'emits [SearchState.searchInProgress, SearchState.searchSuccess], when successful',
+        build: () {
+          when(() => mockTextRepository.search(any())).thenAnswer((_) => searchStreamResult);
 
-        return SearchBloc(mockTextRepository);
-      },
-      act: (searchBloc) => searchBloc.add(const SearchEvent.started('query')),
-      expect: () => [
-        const SearchState.searchInProgress(),
-        SearchState.searchSuccess(searchResult),
-      ],
-    );
+          return SearchBloc(mockTextRepository);
+        },
+        act: (searchBloc) => searchBloc.add(const SearchEvent.started('query')),
+        expect: () => [
+              const SearchState.searchInProgress(),
+              SearchState.searchSuccess(searchResult),
+            ],
+        verify: (_) {
+          verify(() => mockTextRepository.search(any())).called(1);
+        });
 
     blocTest<SearchBloc, SearchState>(
       'emits [SearchState.searchInProgress, SearchState.failure] when unsuccessful',
@@ -64,6 +66,9 @@ void main() {
         const SearchState.searchInProgress(),
         SearchState.searchFailure(searchFailure),
       ],
+      verify: (_) {
+        verify(() => mockTextRepository.search(any())).called(1);
+      }
     );
   });
 }

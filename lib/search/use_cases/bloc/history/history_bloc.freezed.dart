@@ -603,9 +603,11 @@ class _$HistoryStateTearOff {
     return const HistoryStateInitail();
   }
 
-  HistoryStateTermsFiltered termsFiltered(List<String> terms) {
+  HistoryStateTermsFiltered termsFiltered(
+      {required String term, required List<String> history}) {
     return HistoryStateTermsFiltered(
-      terms,
+      term: term,
+      history: history,
     );
   }
 }
@@ -618,13 +620,13 @@ mixin _$HistoryState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<String> terms) termsFiltered,
+    required TResult Function(String term, List<String> history) termsFiltered,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<String> terms)? termsFiltered,
+    TResult Function(String term, List<String> history)? termsFiltered,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -700,7 +702,7 @@ class _$HistoryStateInitail implements HistoryStateInitail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<String> terms) termsFiltered,
+    required TResult Function(String term, List<String> history) termsFiltered,
   }) {
     return initial();
   }
@@ -709,7 +711,7 @@ class _$HistoryStateInitail implements HistoryStateInitail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<String> terms)? termsFiltered,
+    TResult Function(String term, List<String> history)? termsFiltered,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -750,7 +752,7 @@ abstract class $HistoryStateTermsFilteredCopyWith<$Res> {
   factory $HistoryStateTermsFilteredCopyWith(HistoryStateTermsFiltered value,
           $Res Function(HistoryStateTermsFiltered) then) =
       _$HistoryStateTermsFilteredCopyWithImpl<$Res>;
-  $Res call({List<String> terms});
+  $Res call({String term, List<String> history});
 }
 
 /// @nodoc
@@ -767,12 +769,17 @@ class _$HistoryStateTermsFilteredCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? terms = freezed,
+    Object? term = freezed,
+    Object? history = freezed,
   }) {
     return _then(HistoryStateTermsFiltered(
-      terms == freezed
-          ? _value.terms
-          : terms // ignore: cast_nullable_to_non_nullable
+      term: term == freezed
+          ? _value.term
+          : term // ignore: cast_nullable_to_non_nullable
+              as String,
+      history: history == freezed
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
   }
@@ -781,27 +788,34 @@ class _$HistoryStateTermsFilteredCopyWithImpl<$Res>
 /// @nodoc
 
 class _$HistoryStateTermsFiltered implements HistoryStateTermsFiltered {
-  const _$HistoryStateTermsFiltered(this.terms);
+  const _$HistoryStateTermsFiltered(
+      {required this.term, required this.history});
 
   @override
-  final List<String> terms;
+  final String term;
+  @override
+  final List<String> history;
 
   @override
   String toString() {
-    return 'HistoryState.termsFiltered(terms: $terms)';
+    return 'HistoryState.termsFiltered(term: $term, history: $history)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is HistoryStateTermsFiltered &&
-            (identical(other.terms, terms) ||
-                const DeepCollectionEquality().equals(other.terms, terms)));
+            (identical(other.term, term) ||
+                const DeepCollectionEquality().equals(other.term, term)) &&
+            (identical(other.history, history) ||
+                const DeepCollectionEquality().equals(other.history, history)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(terms);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(term) ^
+      const DeepCollectionEquality().hash(history);
 
   @JsonKey(ignore: true)
   @override
@@ -813,20 +827,20 @@ class _$HistoryStateTermsFiltered implements HistoryStateTermsFiltered {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<String> terms) termsFiltered,
+    required TResult Function(String term, List<String> history) termsFiltered,
   }) {
-    return termsFiltered(terms);
+    return termsFiltered(term, history);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<String> terms)? termsFiltered,
+    TResult Function(String term, List<String> history)? termsFiltered,
     required TResult orElse(),
   }) {
     if (termsFiltered != null) {
-      return termsFiltered(terms);
+      return termsFiltered(term, history);
     }
     return orElse();
   }
@@ -855,10 +869,12 @@ class _$HistoryStateTermsFiltered implements HistoryStateTermsFiltered {
 }
 
 abstract class HistoryStateTermsFiltered implements HistoryState {
-  const factory HistoryStateTermsFiltered(List<String> terms) =
-      _$HistoryStateTermsFiltered;
+  const factory HistoryStateTermsFiltered(
+      {required String term,
+      required List<String> history}) = _$HistoryStateTermsFiltered;
 
-  List<String> get terms => throw _privateConstructorUsedError;
+  String get term => throw _privateConstructorUsedError;
+  List<String> get history => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $HistoryStateTermsFilteredCopyWith<HistoryStateTermsFiltered> get copyWith =>
       throw _privateConstructorUsedError;

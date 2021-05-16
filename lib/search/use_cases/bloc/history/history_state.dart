@@ -4,5 +4,6 @@ part of 'history_bloc.dart';
 class HistoryState with _$HistoryState {
   const factory HistoryState.initial() = HistoryStateInitail;
 
-  const factory HistoryState.termsFiltered(List<String> terms) = HistoryStateTermsFiltered;
+  const factory HistoryState.termsFiltered({required String term, required List<String> history}) =
+      HistoryStateTermsFiltered;
 }

@@ -34,6 +34,8 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final searchBloc = context.read<SearchBloc>();
+    final historyBloc = context.read<HistoryBloc>();
 
     return Scaffold(
       appBar: AppBar(
@@ -47,12 +49,14 @@ class _SearchPageState extends State<SearchPage> {
         transition: CircularFloatingSearchBarTransition(),
         physics: const BouncingScrollPhysics(),
         onQueryChanged: (query) {
-          debugPrint('changed:$query');
+          // debugPrint('changed:$query');
+          historyBloc.add(HistoryEvent.changed(query));
         },
         onSubmitted: (query) {
-          debugPrint('submitted:$query');
-          context.read<SearchBloc>().add(SearchEvent.started(query));
           controller.close();
+          // debugPrint('submitted:$query');
+          searchBloc.add(SearchEvent.started(query));
+          historyBloc.add(HistoryEventAdded(query));
         },
         body: FloatingSearchBarScrollNotifier(
           child: BlocConsumer<SearchBloc, SearchState>(
@@ -85,20 +89,23 @@ class _SearchPageState extends State<SearchPage> {
               color: Colors.white,
               elevation: 4,
               child: BlocBuilder<HistoryBloc, HistoryState>(
-                builder: (context, state) {
-                  final historyBloc = context.read<HistoryBloc>();
-                  return state.when(
-                    initial: () => const SearchHistory(histories: [], query: ''),
-                    termsFiltered: (terms) => SearchHistory(
-                      histories: terms,
-                      query: controller.query,
+                builder: (context, stateOption) {
+                  return stateOption.map(
+                    initial: (_) => const SearchHistory(history: [], query: ''),
+                    termsFiltered: (state) => SearchHistory(
+                      history: state.history,
+                      query: state.term,
                       onAdd: () {
-                        historyBloc.add(HistoryEvent.added(controller.query));
+                        controller.close();
+                        searchBloc.add(SearchEvent.started(state.term));
+                        historyBloc.add(HistoryEvent.added(state.term));
                       },
                       onDelete: (term) {
                         historyBloc.add(HistoryEvent.deleted(term));
                       },
                       onSelect: (term) {
+                        controller.close();
+                        searchBloc.add(SearchEvent.started(term));
                         historyBloc.add(HistoryEvent.selected(term));
                       },
                     ),

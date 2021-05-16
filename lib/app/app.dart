@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_good/search/use_cases/bloc/history/history_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_good/search/search.dart';
 import 'package:flutter_good/l10n/l10n.dart';
@@ -27,8 +28,15 @@ class App extends StatelessWidget {
       ],
       supportedLocales: AppLocalizations.supportedLocales,
       // supportedLocales: const [Locale('ru', '')],
-      home: BlocProvider<SearchBloc>(
-        create: (context) => SearchBloc(ResoRepositoryImp())..add(const SearchEvent.started('')),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider<SearchBloc>(
+            create: (context) => SearchBloc(ResoRepositoryImp())..add(const SearchEvent.started('')),
+          ),
+          BlocProvider<HistoryBloc>(
+            create: (context) => HistoryBloc(HistoryRepositoryImp()),
+          ),
+        ],
         child: SearchPage(),
       ),
     );

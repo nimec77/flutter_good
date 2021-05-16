@@ -4,14 +4,14 @@ import 'package:flutter_good/l10n/l10n.dart';
 class SearchHistory extends StatelessWidget {
   const SearchHistory({
     Key? key,
-    required this.histories,
+    required this.history,
     required this.query,
     this.onAdd,
     this.onSelect,
     this.onDelete,
   }) : super(key: key);
 
-  final List<String> histories;
+  final List<String> history;
   final String query;
   final VoidCallback? onAdd;
   final ValueChanged? onSelect;
@@ -20,7 +20,7 @@ class SearchHistory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    if (histories.isEmpty && query.isEmpty) {
+    if (history.isEmpty && query.isEmpty) {
       return Container(
         height: 56,
         width: double.infinity,
@@ -32,7 +32,7 @@ class SearchHistory extends StatelessWidget {
           style: Theme.of(context).textTheme.caption,
         ),
       );
-    } else if (histories.isEmpty) {
+    } else if (history.isEmpty) {
       return ListTile(
         title: Text(query),
         leading: const Icon(Icons.search),
@@ -41,7 +41,7 @@ class SearchHistory extends StatelessWidget {
     }
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: histories
+      children: history
           .map((term) => ListTile(
                 title: Text(term, maxLines: 1, overflow: TextOverflow.ellipsis),
                 trailing: IconButton(
