@@ -9,14 +9,16 @@ import 'package:flutter_good/search/use_cases/ports/text_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ResoRepositoryImp implements TextRepository {
-  final random = Random();
+  ResoRepositoryImp([Random? random]) : _random = random ?? Random(42);
+
+  final Random _random;
 
   @override
   Stream<Either<TextDataFailure, List<TextData>>> search(String query, {ErrorTypes errorTypes = ErrorTypes.noError}) {
     return _search$(query).map((textsData) {
       if (errorTypes == ErrorTypes.error) {
         return left<TextDataFailure, List<TextData>>(const TextDataFailure.error('Server is not available'));
-      } else if (errorTypes == ErrorTypes.randomError && random.nextBool()) {
+      } else if (errorTypes == ErrorTypes.randomError && _random.nextBool()) {
         return left<TextDataFailure, List<TextData>>(const TextDataFailure.error('Server is not available'));
       }
       return right<TextDataFailure, List<TextData>>(textsData);
@@ -42,7 +44,7 @@ class ResoRepositoryImp implements TextRepository {
   }
 
   Iterable<TextData> _search(String query) {
-    final length = random.nextInt(10);
+    final length = _random.nextInt(10);
     return List.generate(length, (index) => TextData('$query search result #${index + 1}/$length', DateTime.now()));
   }
 }

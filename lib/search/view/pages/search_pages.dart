@@ -137,7 +137,7 @@ class _SearchPageState extends State<SearchPage> {
               onPressed: () => controller.dismiss(),
             ),
             icon: const Icon(Icons.error, color: Colors.red),
-            message: Text(
+            content: Text(
               failure.when(unexpected: () => l10n.searchAppBarUnknownError, error: (message) => message),
               style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Colors.white),
             ),

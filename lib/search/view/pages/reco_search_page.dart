@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_good/l10n/l10n.dart';
 import 'package:flutter_good/search/view/widgets/search_history_reco.dart';
 import 'package:flutter_good/search/view/widgets/search_results_list_view.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
-import 'package:flutter_good/l10n/l10n.dart';
 
 class RecoSearchPage extends StatefulWidget {
   const RecoSearchPage({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
+import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter_good/search/search.dart';
 import 'package:flutter_good/search/use_cases/bloc/search/search_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter_good/search/search.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockTextRepository extends Mock implements TextRepository {}

@@ -1,6 +1,6 @@
+import 'package:flutter_good/search/data/repositories/history_repository_imp.dart';
 import 'package:flutter_good/search/use_cases/ports/history_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_good/search/data/repositories/history_repository_imp.dart';
 
 void main() {
   const history = [
