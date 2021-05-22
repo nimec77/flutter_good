@@ -9,7 +9,7 @@ import 'package:flutter_good/search/use_cases/ports/text_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ResoRepositoryImp implements TextRepository {
-  ResoRepositoryImp([Random? random]) : _random = random ?? Random(42);
+  ResoRepositoryImp([Random? random]) : _random = random ?? Random();
 
   final Random _random;
 

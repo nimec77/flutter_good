@@ -119,6 +119,7 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
+
   void showSnackBar(TextDataFailure failure) {
     final l10n = context.l10n;
 
