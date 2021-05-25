@@ -7,6 +7,10 @@ import 'package:flutter_test/flutter_test.dart';
 class MockTextRepository extends Mock implements TextRepository {}
 
 void main() {
+  setUpAll(() {
+    registerFallbackValue<ErrorTypes>(ErrorTypes.noError);
+  });
+
   group('SearchBloc tests', () {
     final mockTextRepository = MockTextRepository();
     final searchResult = [TextData('Text 0', DateTime.now())];
@@ -40,7 +44,7 @@ void main() {
     blocTest<SearchBloc, SearchState>(
         'emits [SearchState.searchInProgress, SearchState.searchSuccess], when successful',
         build: () {
-          when(() => mockTextRepository.search(any(), errorTypes: any(that: Matcher()))).thenAnswer((_) {
+          when(() => mockTextRepository.search(any(), errorTypes: any(named: 'errorTypes'))).thenAnswer((_) {
             return searchStreamResult;
           });
 
@@ -52,14 +56,14 @@ void main() {
               SearchState.searchSuccess(searchResult),
             ],
         verify: (_) {
-          verify(() => mockTextRepository.search(any(), errorTypes: ErrorTypes.randomError)).called(1);
+          verify(() => mockTextRepository.search(any(), errorTypes: any(named: 'errorTypes'))).called(1);
         });
 
     blocTest<SearchBloc, SearchState>(
       'emits [SearchState.searchInProgress, SearchState.failure] when unsuccessful',
       build: () => SearchBloc(mockTextRepository),
       act: (searchBloc) {
-        when(() => mockTextRepository.search(any())).thenAnswer((_) => searchStreamFailure);
+        when(() => mockTextRepository.search(any(), errorTypes: any(named: 'errorTypes'))).thenAnswer((_) => searchStreamFailure);
 
         searchBloc.add(const SearchEvent.started('query'));
       },
@@ -68,7 +72,7 @@ void main() {
         SearchState.searchFailure(searchFailure),
       ],
       verify: (_) {
-        verify(() => mockTextRepository.search(any())).called(1);
+        verify(() => mockTextRepository.search(any(), errorTypes: any(named: 'errorTypes'))).called(1);
       }
     );
   });
