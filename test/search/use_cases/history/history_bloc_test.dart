@@ -43,12 +43,12 @@ void main() {
     blocTest<HistoryBloc, HistoryState>(
         'emits [HistoryState.termsFiltered] with list of ["history2", "history3", "history4", "history5"] '
         'when event HistoryEvent.deleted("history1")',
-        build: () => HistoryBloc(mockHistoryRepository),
-        act: (historyBloc) {
+        build: () {
           when(() => mockHistoryRepository.deleteSearchTerm(history.first)).thenReturn(historyDeleted);
-
-          historyBloc.add(HistoryEvent.deleted(history.first));
+          
+          return HistoryBloc(mockHistoryRepository);
         },
+        act: (historyBloc) => historyBloc.add(HistoryEvent.deleted(history.first)),
         expect: () => [
               HistoryState.termsFiltered(term: '', history: historyDeleted),
             ],

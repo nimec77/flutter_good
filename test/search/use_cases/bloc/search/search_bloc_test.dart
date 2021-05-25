@@ -1,9 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_good/search/search.dart';
-import 'package:flutter_good/search/use_cases/bloc/search/search_bloc.dart';
+import 'package:flutter_good/search/use_cases/enums/error_types.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 
 class MockTextRepository extends Mock implements TextRepository {}
 
@@ -41,7 +40,9 @@ void main() {
     blocTest<SearchBloc, SearchState>(
         'emits [SearchState.searchInProgress, SearchState.searchSuccess], when successful',
         build: () {
-          when(() => mockTextRepository.search(any())).thenAnswer((_) => searchStreamResult);
+          when(() => mockTextRepository.search(any(), errorTypes: any(that: Matcher()))).thenAnswer((_) {
+            return searchStreamResult;
+          });
 
           return SearchBloc(mockTextRepository);
         },
@@ -51,17 +52,17 @@ void main() {
               SearchState.searchSuccess(searchResult),
             ],
         verify: (_) {
-          verify(() => mockTextRepository.search(any())).called(1);
+          verify(() => mockTextRepository.search(any(), errorTypes: ErrorTypes.randomError)).called(1);
         });
 
     blocTest<SearchBloc, SearchState>(
       'emits [SearchState.searchInProgress, SearchState.failure] when unsuccessful',
-      build: () {
+      build: () => SearchBloc(mockTextRepository),
+      act: (searchBloc) {
         when(() => mockTextRepository.search(any())).thenAnswer((_) => searchStreamFailure);
 
-        return SearchBloc(mockTextRepository);
+        searchBloc.add(const SearchEvent.started('query'));
       },
-      act: (searchBloc) => searchBloc.add(const SearchEvent.started('query')),
       expect: () => [
         const SearchState.searchInProgress(),
         SearchState.searchFailure(searchFailure),
