@@ -19,9 +19,11 @@ class SearchList extends StatelessWidget {
         final textData = textsData[index];
         return textData.maybeMap(
           (value) {
-            return ListTile(
-              title: Text(value.text),
-              subtitle: Text(value.createData.toString()),
+            return Material(
+              child: ListTile(
+                title: Text(value.text),
+                subtitle: Text(value.createData.toString()),
+              ),
             );
           },
           orElse: () => Container(),

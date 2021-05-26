@@ -17,9 +17,6 @@ void main() {
   });
 
   group('Test TextRepository', () {
-    /** Данная реальзация сервиса возвращает случайное количество записей от 0 до 50
-     * Поэтому инода тест может падать
-     */
     test('should return a iterable of TextData length 7', () async {
       final textRepository = ResoRepositoryImp(Random(42));
       final textsLength = 7;
