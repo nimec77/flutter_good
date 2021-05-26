@@ -44,9 +44,8 @@ void main() {
     blocTest<SearchBloc, SearchState>(
         'emits [SearchState.searchInProgress, SearchState.searchSuccess], when successful',
         build: () {
-          when(() => mockTextRepository.search(any(), errorTypes: any(named: 'errorTypes'))).thenAnswer((_) {
-            return searchStreamResult;
-          });
+          when(() => mockTextRepository.search(any(), errorTypes: any(named: 'errorTypes')))
+              .thenAnswer((_) => searchStreamResult);
 
           return SearchBloc(mockTextRepository);
         },
@@ -59,21 +58,20 @@ void main() {
           verify(() => mockTextRepository.search(any(), errorTypes: any(named: 'errorTypes'))).called(1);
         });
 
-    blocTest<SearchBloc, SearchState>(
-      'emits [SearchState.searchInProgress, SearchState.failure] when unsuccessful',
-      build: () => SearchBloc(mockTextRepository),
-      act: (searchBloc) {
-        when(() => mockTextRepository.search(any(), errorTypes: any(named: 'errorTypes'))).thenAnswer((_) => searchStreamFailure);
+    blocTest<SearchBloc, SearchState>('emits [SearchState.searchInProgress, SearchState.failure] when unsuccessful',
+        build: () => SearchBloc(mockTextRepository),
+        act: (searchBloc) {
+          when(() => mockTextRepository.search(any(), errorTypes: any(named: 'errorTypes')))
+              .thenAnswer((_) => searchStreamFailure);
 
-        searchBloc.add(const SearchEvent.started('query'));
-      },
-      expect: () => [
-        const SearchState.searchInProgress(),
-        SearchState.searchFailure(searchFailure),
-      ],
-      verify: (_) {
-        verify(() => mockTextRepository.search(any(), errorTypes: any(named: 'errorTypes'))).called(1);
-      }
-    );
+          searchBloc.add(const SearchEvent.started('query'));
+        },
+        expect: () => [
+              const SearchState.searchInProgress(),
+              SearchState.searchFailure(searchFailure),
+            ],
+        verify: (_) {
+          verify(() => mockTextRepository.search(any(), errorTypes: any(named: 'errorTypes'))).called(1);
+        });
   });
 }
