@@ -13,19 +13,22 @@ void main() {
     });
 
     testWidgets('render List', (tester) async {
-      final textsDataOrFails = [
-        TextData('Test text', DateTime.now()),
-      ];
+      final textData = TextData('Test text', DateTime.now());
+      final textsDataOrFails = [textData];
 
       await tester.pumpApp(SearchList(textsData: textsDataOrFails));
       expect(find.byType(ListTile), findsOneWidget);
 
       textsDataOrFails.first.maybeMap(
-            (textData) {
-          final text = find.text(textData.text);
-          expect(text, findsOneWidget);
-          final date = find.text(textData.createData.toString());
-          expect(date, findsOneWidget);
+        (textData) {
+          final textFinder = find.text(textData.text);
+          expect(textFinder, findsOneWidget);
+          final textWidget = tester.firstWidget(textFinder) as Text;
+          expect(textWidget.data, textData.text);
+          final dateFinder = find.text(textData.createData.toString());
+          expect(dateFinder, findsOneWidget);
+          final dateWidget = tester.firstWidget(dateFinder) as Text;
+          expect(dateWidget.data, textData.createData.toString());
         },
         orElse: () => throw (AssertionError('Receive TextData error')),
       );

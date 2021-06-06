@@ -33,23 +33,27 @@ class SearchHistory extends StatelessWidget {
         ),
       );
     } else if (history.isEmpty) {
-      return ListTile(
-        title: Text(query),
-        leading: const Icon(Icons.search),
-        onTap: onAdd,
+      return Material(
+        child: ListTile(
+          title: Text(query),
+          leading: const Icon(Icons.search),
+          onTap: onAdd,
+        ),
       );
     }
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: history
-          .map((term) => ListTile(
-                title: Text(term, maxLines: 1, overflow: TextOverflow.ellipsis),
-                trailing: IconButton(
-                  icon: const Icon(Icons.clear),
-                  onPressed: () => onDelete?.call(term),
+          .map((term) => Material(
+            child: ListTile(
+                  title: Text(term, maxLines: 1, overflow: TextOverflow.ellipsis),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.clear),
+                    onPressed: () => onDelete?.call(term),
+                  ),
+                  onTap: () => onSelect?.call(term),
                 ),
-                onTap: () => onSelect?.call(term),
-              ))
+          ))
           .toList(),
     );
   }

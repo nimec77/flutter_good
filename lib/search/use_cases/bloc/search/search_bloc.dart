@@ -46,7 +46,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     yield const SearchState.searchInProgress();
     await _textDataStreamSubscription?.cancel();
     _textDataStreamSubscription =
-        textRepository.search(query, errorTypes: ErrorTypes.randomError).listen((failureOrTextsData) {
+        textRepository.search(query, errorTypes: ErrorTypes.noError).listen((failureOrTextsData) {
       add(SearchEvent.textDataReceived(failureOrTextsData));
     });
   }
