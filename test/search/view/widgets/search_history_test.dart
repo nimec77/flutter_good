@@ -9,7 +9,7 @@ import '../../../helpers/helpers.dart';
 void main() {
   group('SearchHistory', () {
     testWidgets('render SearchHistory', (tester) async {
-      await tester.pumpApp(const SearchHistory(history: [], query: ''));
+      await tester.pumpWithScaffold(const SearchHistory(history: [], query: ''));
       expect(find.byType(SearchHistory), findsOneWidget);
     });
 
@@ -19,7 +19,7 @@ void main() {
         buildContext = context;
         return const SearchHistory(history: [], query: '');
       });
-      await tester.pumpApp(widget);
+      await tester.pumpWithScaffold(widget);
       final l10n = buildContext.l10n;
 
       final searchTextFinder = find.text(l10n.searchAppStartSearch);
@@ -30,7 +30,7 @@ void main() {
 
     testWidgets('render query if history is empty on SearchHistory', (tester) async {
       const query = '123';
-      await tester.pumpApp(const SearchHistory(history: [], query: query));
+      await tester.pumpWithScaffold(const SearchHistory(history: [], query: query));
 
       final queryListTileFinder = find.byType(ListTile);
       expect(queryListTileFinder, findsOneWidget);
@@ -43,7 +43,7 @@ void main() {
 
     testWidgets('render history on SearchHistory', (tester) async {
       const history = ['123'];
-      await tester.pumpApp(const SearchHistory(history: history, query: ''));
+      await tester.pumpWithScaffold(const SearchHistory(history: history, query: ''));
 
       final historyListTileFinder = find.byType(ListTile);
       expect(historyListTileFinder, findsOneWidget);

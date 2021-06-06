@@ -24,4 +24,19 @@ extension PumpApp on WidgetTester {
       ),
     );
   }
+
+  Future<void> pumpWithScaffold(Widget widget) {
+    return pumpWidget(
+      MaterialApp(
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+        ],
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: Scaffold(
+          body: widget,
+        ),
+      ),
+    );
+  }
 }
