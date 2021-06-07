@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_good/search/search.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../helpers/helpers.dart';
 
@@ -18,9 +20,12 @@ void main() {
   // late TextDataFailure searchFailure;
   // late Stream<Either<TextDataFailure, List<TextData>>> searchStreamFailure;
 
-  setUpAll(() {
+  setUpAll(() async {
     registerFallbackValue<ErrorTypes>(ErrorTypes.noError);
     textRepository = MockTextRepository();
+    HydratedBloc.storage = await HydratedStorage.build(
+        storageDirectory: await getApplicationDocumentsDirectory(),
+    );
   });
 
   setUp(() {
@@ -50,6 +55,8 @@ void main() {
       expect(find.byType(SearchPage), findsOneWidget);
     });
 
+
+    // TODO: Надо замокировать блок
     testWidgets('render list on successful search', (tester) async {
       when(() => textRepository.search(any(), errorTypes: any(named: 'errorTypes')))
           .thenAnswer((_) => searchStreamResult);

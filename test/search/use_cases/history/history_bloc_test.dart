@@ -2,11 +2,20 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_good/search/use_cases/bloc/history/history_bloc.dart';
 import 'package:flutter_good/search/use_cases/ports/history_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:path_provider/path_provider.dart';
 
 class MockHistoryRepository extends Mock implements HistoryRepository {}
 
 void main() {
+
+  setUpAll(() async {
+    HydratedBloc.storage = await HydratedStorage.build(
+        storageDirectory: await getApplicationDocumentsDirectory(),
+    );
+  });
+
   group('HistoryBloc tests', () {
     final mockHistoryRepository = MockHistoryRepository();
     const history = [
