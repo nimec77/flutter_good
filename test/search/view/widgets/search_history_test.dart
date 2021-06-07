@@ -35,6 +35,7 @@ void main() {
       final queryListTileFinder = find.byType(ListTile);
       expect(queryListTileFinder, findsOneWidget);
       final queryListTileWidget = tester.firstWidget(queryListTileFinder) as ListTile;
+      expect(queryListTileWidget.leading.runtimeType, Icon);
       final queryIcon = queryListTileWidget.leading! as Icon;
       expect(queryIcon.icon, Icons.search);
       final queryText = queryListTileWidget.title! as Text;

@@ -12,7 +12,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 extension PumpApp on WidgetTester {
-  Future<void> pumpApp(Widget widget) {
+  Future<void> pumpApp(
+    Widget widget, [
+    Duration? duration,
+    EnginePhase phase = EnginePhase.sendSemanticsUpdate,
+  ]) {
     return pumpWidget(
       MaterialApp(
         localizationsDelegates: [
@@ -22,6 +26,8 @@ extension PumpApp on WidgetTester {
         supportedLocales: AppLocalizations.supportedLocales,
         home: widget,
       ),
+      duration,
+      phase,
     );
   }
 

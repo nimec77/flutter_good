@@ -27,7 +27,9 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   void dispose() {
-    controller.close();
+    if (!controller.isClosed) {
+      controller.close();
+    }
     super.dispose();
   }
 

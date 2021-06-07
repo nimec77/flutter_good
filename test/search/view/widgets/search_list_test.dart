@@ -16,7 +16,7 @@ void main() {
       final textData = TextData('Test text', DateTime.now());
       final textsDataOrFails = [textData];
 
-      await tester.pumpApp(SearchList(textsData: textsDataOrFails));
+      await tester.pumpWithScaffold(SearchList(textsData: textsDataOrFails));
       expect(find.byType(ListTile), findsOneWidget);
 
       textsDataOrFails.first.maybeMap(
