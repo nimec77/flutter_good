@@ -22,7 +22,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      localizationsDelegates: [
+      localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
       ],
@@ -37,7 +37,7 @@ class App extends StatelessWidget {
             create: (context) => HistoryBloc(HistoryRepositoryImp()),
           ),
         ],
-        child: SearchPage(),
+        child: const SearchPage(),
       ),
     );
   }

@@ -3,7 +3,7 @@ import 'package:flutter_good/search/search.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
 class SearchList extends StatelessWidget {
-  SearchList({Key? key, required this.textsData}) : super(key: key);
+  const SearchList({Key? key, required this.textsData}) : super(key: key);
 
   final List<TextData> textsData;
 

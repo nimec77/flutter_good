@@ -8,7 +8,7 @@ import '../../../helpers/helpers.dart';
 void main() {
   group('SearchList', () {
     testWidgets('renders SearchList', (tester) async {
-      await tester.pumpApp(SearchList(textsData: []));
+      await tester.pumpApp(const SearchList(textsData: []));
       expect(find.byType(SearchList), findsOneWidget);
     });
 

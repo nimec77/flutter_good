@@ -595,6 +595,18 @@ abstract class HistoryEventChanded implements HistoryEvent {
       throw _privateConstructorUsedError;
 }
 
+HistoryState _$HistoryStateFromJson(Map<String, dynamic> json) {
+  switch (json['runtimeType'] as String) {
+    case 'initial':
+      return HistoryStateInitail.fromJson(json);
+    case 'termsFiltered':
+      return HistoryStateTermsFiltered.fromJson(json);
+
+    default:
+      throw FallThroughError();
+  }
+}
+
 /// @nodoc
 class _$HistoryStateTearOff {
   const _$HistoryStateTearOff();
@@ -609,6 +621,10 @@ class _$HistoryStateTearOff {
       term: term,
       history: history,
     );
+  }
+
+  HistoryState fromJson(Map<String, Object> json) {
+    return HistoryState.fromJson(json);
   }
 }
 
@@ -643,6 +659,7 @@ mixin _$HistoryState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -681,9 +698,12 @@ class _$HistoryStateInitailCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$HistoryStateInitail implements HistoryStateInitail {
   const _$HistoryStateInitail();
+
+  factory _$HistoryStateInitail.fromJson(Map<String, dynamic> json) =>
+      _$_$HistoryStateInitailFromJson(json);
 
   @override
   String toString() {
@@ -741,10 +761,18 @@ class _$HistoryStateInitail implements HistoryStateInitail {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$HistoryStateInitailToJson(this)..['runtimeType'] = 'initial';
+  }
 }
 
 abstract class HistoryStateInitail implements HistoryState {
   const factory HistoryStateInitail() = _$HistoryStateInitail;
+
+  factory HistoryStateInitail.fromJson(Map<String, dynamic> json) =
+      _$HistoryStateInitail.fromJson;
 }
 
 /// @nodoc
@@ -786,10 +814,13 @@ class _$HistoryStateTermsFilteredCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$HistoryStateTermsFiltered implements HistoryStateTermsFiltered {
   const _$HistoryStateTermsFiltered(
       {required this.term, required this.history});
+
+  factory _$HistoryStateTermsFiltered.fromJson(Map<String, dynamic> json) =>
+      _$_$HistoryStateTermsFilteredFromJson(json);
 
   @override
   final String term;
@@ -866,12 +897,21 @@ class _$HistoryStateTermsFiltered implements HistoryStateTermsFiltered {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$HistoryStateTermsFilteredToJson(this)
+      ..['runtimeType'] = 'termsFiltered';
+  }
 }
 
 abstract class HistoryStateTermsFiltered implements HistoryState {
   const factory HistoryStateTermsFiltered(
       {required String term,
       required List<String> history}) = _$HistoryStateTermsFiltered;
+
+  factory HistoryStateTermsFiltered.fromJson(Map<String, dynamic> json) =
+      _$HistoryStateTermsFiltered.fromJson;
 
   String get term => throw _privateConstructorUsedError;
   List<String> get history => throw _privateConstructorUsedError;

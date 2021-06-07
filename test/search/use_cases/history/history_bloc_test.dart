@@ -30,10 +30,10 @@ void main() {
     blocTest<HistoryBloc, HistoryState>('emits [HistoryState.termsFiltered] when event HistoryEvent.added',
         build: () => HistoryBloc(mockHistoryRepository),
         act: (historyBloc) {
-          final term = 'term';
+          const term = 'term';
           when(() => mockHistoryRepository.addSearchTerm(any())).thenReturn([term]);
 
-          historyBloc.add(HistoryEvent.added(term));
+          historyBloc.add(const HistoryEvent.added(term));
         },
         expect: () => [
               const HistoryState.termsFiltered(term: 'term', history: ['term']),

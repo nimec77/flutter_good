@@ -1,16 +1,19 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_good/search/search.dart';
 import 'package:flutter_good/search/use_cases/ports/history_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+
+part 'history_bloc.freezed.dart';
+
+part 'history_bloc.g.dart';
 
 part 'history_event.dart';
 
 part 'history_state.dart';
 
-part 'history_bloc.freezed.dart';
-
-class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
+class HistoryBloc extends HydratedBloc<HistoryEvent, HistoryState> {
   HistoryBloc(this.historyRepository) : super(const HistoryState.initial());
 
   final HistoryRepository historyRepository;
@@ -46,8 +49,22 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
   Stream<HistoryState> _mapSelectedEventToState(String term) async* {
     yield HistoryState.termsFiltered(term: term, history: historyRepository.putSearchTermFirst(term));
   }
-  
+
   Stream<HistoryState> _mapChangedEventToState(String filter) async* {
     yield HistoryState.termsFiltered(term: filter, history: historyRepository.filterSearchTerms(filter));
   }
+
+  @override
+  HistoryState? fromJson(Json json) {
+    final stateOption = HistoryState.fromJson(json)
+      ..map(
+        initial: (_) {},
+        termsFiltered: (state) => historyRepository.initialHistory(state.history),
+      );
+
+    return stateOption;
+  }
+
+  @override
+  Map<String, dynamic>? toJson(HistoryState state) => state.toJson();
 }

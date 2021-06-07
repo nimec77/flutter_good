@@ -19,7 +19,7 @@ extension PumpApp on WidgetTester {
   ]) {
     return pumpWidget(
       MaterialApp(
-        localizationsDelegates: [
+        localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
         ],
@@ -34,7 +34,7 @@ extension PumpApp on WidgetTester {
   Future<void> pumpWithScaffold(Widget widget) {
     return pumpWidget(
       MaterialApp(
-        localizationsDelegates: [
+        localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
         ],

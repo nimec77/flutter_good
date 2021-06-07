@@ -37,7 +37,7 @@ void main() {
           create: (context) => HistoryBloc(HistoryRepositoryImp()),
         ),
       ],
-      child: SearchPage(),
+      child: const SearchPage(),
     );
   });
 

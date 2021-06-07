@@ -12,6 +12,8 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_good/app/app.dart';
 import 'package:flutter_good/app/app_bloc_observer.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() {
   Bloc.observer = AppBlocObserver();
@@ -20,7 +22,13 @@ void main() {
   };
 
   runZonedGuarded(
-    () => runApp(const App()),
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      HydratedBloc.storage = await HydratedStorage.build(
+        storageDirectory: await getApplicationDocumentsDirectory(),
+      );
+      runApp(const App());
+    },
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
 }

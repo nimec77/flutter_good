@@ -10,7 +10,7 @@ import 'package:rxdart/rxdart.dart';
 
 class ResoRepositoryImp implements TextRepository {
   ResoRepositoryImp({int? max, Random? random})
-      : _max = max ?? 100,
+      : _max = max ?? 10,
         _random = random ?? Random();
 
   final int _max;

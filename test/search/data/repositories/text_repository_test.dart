@@ -59,10 +59,6 @@ void main() {
       );
     });
 
-    /**
-     * Данный тест зависит от максимального количества случайных элементов в ResoRepositoryImp
-     * Он написан на 10 максимальных элементов
-     */
     test('Pseudo random test with data and errors', () async {
       final textRepository = ResoRepositoryImp(max: 10, random: Random(4));
       final result = textRepository.search('Reco Coder', errorTypes: ErrorTypes.randomError);

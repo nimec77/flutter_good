@@ -8,6 +8,11 @@ class HistoryRepositoryImp implements HistoryRepository {
   final int maxHistoryLength;
   late List<String> _history;
 
+  @override
+  void initialHistory(List<String> history) {
+    _history = _removeUnnecessary(history, maxHistoryLength);
+  }
+
   List<String> _removeUnnecessary(List<String> list, int max) {
     if (list.length <= max) {
       return [...list];
