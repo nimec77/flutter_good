@@ -57,10 +57,7 @@ class HistoryBloc extends HydratedBloc<HistoryEvent, HistoryState> {
   @override
   HistoryState? fromJson(Json json) {
     final stateOption = HistoryState.fromJson(json)
-      ..map(
-        initial: (_) {},
-        termsFiltered: (state) => historyRepository.initialHistory(state.history),
-      );
+      ..maybeMap(termsFiltered: (state) => historyRepository.initialHistory(state.history), orElse: () {});
 
     return stateOption;
   }
