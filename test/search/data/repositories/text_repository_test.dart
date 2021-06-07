@@ -18,8 +18,8 @@ void main() {
 
   group('Test TextRepository', () {
     test('should return a iterable of TextData length 7', () async {
-      final textRepository = ResoRepositoryImp(Random(42));
-      final textsLength = 7;
+      final textRepository = ResoRepositoryImp(max: 10, random: Random(42));
+      const textsLength = 7;
       final expectData = List.generate(textsLength, (index) => 'Reco Coder search result #${index + 1}/$textsLength');
 
       final result = textRepository.search('Reco Coder');
@@ -47,50 +47,44 @@ void main() {
     });
 
     test('should return an error', () async {
-      final textRepository = ResoRepositoryImp(Random(42));
+      final textRepository = ResoRepositoryImp(max: 10, random: Random(42));
       final result = textRepository.search('query', errorTypes: ErrorTypes.error);
 
       final streamQueue = StreamQueue<Either<TextDataFailure, Iterable<TextData>>>(result);
 
       final first = await streamQueue.next;
       first.fold(
-            (error) => expect(error, const TextDataFailure.error('Server is not available')),
-            (_) => throw AssertionError('Data received instead of error'),
+        (error) => expect(error, const TextDataFailure.error('Server is not available')),
+        (_) => throw AssertionError('Data received instead of error'),
       );
     });
 
+    /**
+     * Данный тест зависит от максимального количества случайных элементов в ResoRepositoryImp
+     * Он написан на 10 максимальных элементов
+     */
     test('Pseudo random test with data and errors', () async {
-      final textRepository = ResoRepositoryImp(Random(4));
+      final textRepository = ResoRepositoryImp(max: 10, random: Random(4));
       final result = textRepository.search('Reco Coder', errorTypes: ErrorTypes.randomError);
       streamQueue = StreamQueue<Either<TextDataFailure, Iterable<TextData>>>(result);
 
-      var count = 0;
       while (await streamQueue!.hasNext) {
         final textsDataOrFailure = await streamQueue!.next;
         textsDataOrFailure.fold(
-              (error) {
-            if (count == 1) {
-              throw (AssertionError('Error getting TextData'));
-            } else {
-              expect(error, const TextDataFailure.error('Server is not available'));
-            }
+          (error) {
+            expect(error, const TextDataFailure.error('Server is not available'));
           },
-              (textsData) {
-            if (count != 1) {
-              throw (AssertionError('Data received instead of error'));
-            }
+          (textsData) {
             final actualData = textsData.map(
-                  (e) => e.maybeMap(
-                    (value) => value.text,
+              (e) => e.maybeMap(
+                (value) => value.text,
                 orElse: () => throw AssertionError('Receive TextData error'),
               ),
             );
-            expect(actualData, ['Reco Coder search result #$count/5']);
+            expect(actualData, ['Reco Coder search result #1/5']);
           },
         );
-        count++;
       }
     });
-
   });
 }

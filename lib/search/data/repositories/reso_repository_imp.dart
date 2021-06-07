@@ -9,8 +9,11 @@ import 'package:flutter_good/search/use_cases/ports/text_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ResoRepositoryImp implements TextRepository {
-  ResoRepositoryImp([Random? random]) : _random = random ?? Random();
+  ResoRepositoryImp({int? max, Random? random})
+      : _max = max ?? 100,
+        _random = random ?? Random();
 
+  final int _max;
   final Random _random;
 
   @override
@@ -44,7 +47,7 @@ class ResoRepositoryImp implements TextRepository {
   }
 
   Iterable<TextData> _search(String query) {
-    final length = _random.nextInt(100);
+    final length = _random.nextInt(_max);
     return List.generate(length, (index) => TextData('$query search result #${index + 1}/$length', DateTime.now()));
   }
 }
