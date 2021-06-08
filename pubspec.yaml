@@ -12,6 +12,9 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  algolia:
+    git:
+      url: https://github.com/nimec77/dart_algolia
   bloc: ^7.0.0
   hydrated_bloc: ^7.0.1
   dartz: ^0.10.0-nullsafety.1
