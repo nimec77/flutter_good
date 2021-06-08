@@ -3,8 +3,8 @@ import 'package:flutter_good/search/use_cases/ports/providers/search_provider.da
 
 class AlgoliaProvider implements SearchProvider {
   final _algolia = const Algolia.init(
-    applicationId: 'MTQYRQ4OSF',
-    apiKey: '35ed6ab8df9ca4057ecd4e3c9eb81c6c',
+    applicationId: '',
+    apiKey: '',
   );
 
   @override
