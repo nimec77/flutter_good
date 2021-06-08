@@ -1,16 +1,16 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_good/search/data/providers/algolia_provider.dart';
 import 'package:flutter_good/search/search.dart';
+import 'package:flutter_good/search/use_cases/ports/providers/search_provider.dart';
 
 class AlgoliaRepositoryImp implements TextRepository {
-  AlgoliaRepositoryImp(this.algoliaProvider);
+  AlgoliaRepositoryImp(this.searchProvider);
 
-  final AlgoliaProvider algoliaProvider;
+  final SearchProvider searchProvider;
 
   @override
   Stream<Either<TextDataFailure, List<TextData>>> search(String query,
       {ErrorTypes errorTypes = ErrorTypes.noError}) async* {
-    final snapshots = await algoliaProvider.search('users', query);
+    final snapshots = await searchProvider.search('users', query);
 
     if (!snapshots.hasHits) {
       yield right([]);

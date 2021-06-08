@@ -6,9 +6,11 @@
 // https://opensource.org/licenses/MIT.
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_good/app/app.dart';
 import 'package:flutter_good/app/app_bloc_observer.dart';
@@ -31,15 +33,17 @@ void main() {
       HydratedBloc.storage = await HydratedStorage.build(
         storageDirectory: await getApplicationDocumentsDirectory(),
       );
-      runApp(App(container: createData()));
+      runApp(App(container: await createData()));
     },
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
 }
 
-Map<dynamic, dynamic> createData() {
+Future<Map<dynamic, dynamic>> createData() async {
+  final configString = await rootBundle.loadString('assets/config.json');
+  final config = json.decode(configString) as Json;
   return {
-    TextRepository: AlgoliaRepositoryImp(AlgoliaProvider()),
+    TextRepository: AlgoliaRepositoryImp(AlgoliaProvider(config['applicationId'], config['apiKey'])),
     HistoryRepository: HistoryRepositoryImp(),
   };
 }

@@ -2,10 +2,16 @@ import 'package:algolia/algolia.dart';
 import 'package:flutter_good/search/use_cases/ports/providers/search_provider.dart';
 
 class AlgoliaProvider implements SearchProvider {
-  final _algolia = const Algolia.init(
-    applicationId: '',
-    apiKey: '',
-  );
+  AlgoliaProvider(this.applicationId, this.apiKey) {
+    _algolia = Algolia.init(
+      applicationId: applicationId,
+      apiKey: apiKey,
+    );
+  }
+
+  final String applicationId;
+  final String apiKey;
+  late final Algolia _algolia;
 
   @override
   Future<AlgoliaQuerySnapshot> search(String indexName, String query) async {
