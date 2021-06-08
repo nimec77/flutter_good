@@ -1,4 +1,4 @@
-import 'package:flutter_good/search/use_cases/ports/history_repository.dart';
+import 'package:flutter_good/search/use_cases/ports/repositories/history_repository.dart';
 
 class HistoryRepositoryImp implements HistoryRepository {
   HistoryRepositoryImp({List<String> history = const [], this.maxHistoryLength = 5}) {

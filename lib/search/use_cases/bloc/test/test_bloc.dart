@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter_good/search/use_cases/ports/test_repository.dart';
+import 'package:flutter_good/search/use_cases/ports/repositories/test_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'test_bloc.freezed.dart';

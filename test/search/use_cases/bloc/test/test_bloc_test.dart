@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_good/search/use_cases/bloc/test/test_bloc.dart';
-import 'package:flutter_good/search/use_cases/ports/test_repository.dart';
+import 'package:flutter_good/search/use_cases/ports/repositories/test_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

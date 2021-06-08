@@ -5,7 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_good/search/domain/entities/text/text_data.dart';
 import 'package:flutter_good/search/domain/entities/text/text_data_failure.dart';
 import 'package:flutter_good/search/use_cases/enums/error_types.dart';
-import 'package:flutter_good/search/use_cases/ports/text_repository.dart';
+import 'package:flutter_good/search/use_cases/ports/repositories/text_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:meta/meta.dart';
 

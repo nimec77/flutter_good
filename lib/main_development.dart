@@ -15,7 +15,7 @@ import 'package:flutter_good/app/app_bloc_observer.dart';
 import 'package:flutter_good/search/data/providers/algolia_provider.dart';
 import 'package:flutter_good/search/data/repositories/algolia_repository_imp.dart';
 import 'package:flutter_good/search/search.dart';
-import 'package:flutter_good/search/use_cases/ports/history_repository.dart';
+import 'package:flutter_good/search/use_cases/ports/repositories/history_repository.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 

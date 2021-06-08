@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_good/search/search.dart';
-import 'package:flutter_good/search/use_cases/ports/history_repository.dart';
+import 'package:flutter_good/search/use_cases/ports/repositories/history_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 

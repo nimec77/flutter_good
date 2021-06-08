@@ -10,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_good/l10n/l10n.dart';
 import 'package:flutter_good/search/search.dart';
 import 'package:flutter_good/search/use_cases/bloc/history/history_bloc.dart';
-import 'package:flutter_good/search/use_cases/ports/history_repository.dart';
+import 'package:flutter_good/search/use_cases/ports/repositories/history_repository.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class App extends StatelessWidget {
