@@ -18,7 +18,7 @@ class AlgoliaRepositoryImp implements TextRepository {
     }
 
     yield right(snapshots.hits
-        .map((e) => TextData("${e.data['firstName']} ${e.data['lastName']} ${e.data['middleName']}", DateTime.now()))
+        .map((e) => TextData('${e.data['firstName']} ${e.data['middleName']} ${e.data['lastName']}', DateTime.now()))
         .toList());
   }
 }
