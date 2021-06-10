@@ -1,0 +1,70 @@
+{
+  "hits": [
+    {
+      "id": "Ycj0fFgv2ga9QPtz2j3pR31JEWG2",
+      "lastName": "Kliukina",
+      "photoURL": "https://lh4.googleusercontent.com/-6OvTaqFBo3Q/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJNBrAJ3NYLhmg37eYVSYw_KeDlwJw/photo.jpg",
+      "firstName": "Anna",
+      "middleName": "",
+      "email": "annacool844@gmail.com",
+      "objectID": "Ycj0fFgv2ga9QPtz2j3pR31JEWG2",
+      "_highlightResult": {
+        "lastName": {
+          "value": "Kliukina",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        "firstName": {
+          "value": ",<em>A</em>nna",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "a"
+          ]
+        },
+        "middleName": {
+          "value": "",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      }
+    },
+    {
+      "id": "4u87btco8bcqwjdwl5V62k6TStS2",
+      "lastName": "S.",
+      "firstName": "Alex",
+      "middleName": "",
+      "email": "alex.sagalakov@gmail.com",
+      "photoURL": "https://lh3.googleusercontent.com/a-/AAuE7mANEYz3HCm1ENnOxdZ-m85crAxFrpLvM5AoI4UzLw",
+      "objectID": "4u87btco8bcqwjdwl5V62k6TStS2",
+      "_highlightResult": {
+        "lastName": {
+          "value": "S.",
+          "matchLevel": "none",
+          "matchedWords": []
+        },
+        "firstName": {
+          "value": ",<em>A</em>lex",
+          "matchLevel": "full",
+          "fullyHighlighted": false,
+          "matchedWords": [
+            "a"
+          ]
+        },
+        "middleName": {
+          "value": "",
+          "matchLevel": "none",
+          "matchedWords": []
+        }
+      }
+    }
+  ],
+  "nbHits": 2,
+  "page": 0,
+  "nbPages": 1,
+  "hitsPerPage": 20,
+  "exhaustiveNbHits": true,
+  "query": "a",
+  "params": "facetFilters=%5B%5D&optionalFilters=%5B%5D&numericFilters=%5B%5D&tagFilters=%5B%5D&query=a",
+  "processingTimeMS": 1
+}

@@ -6,3 +6,5 @@
 // https://opensource.org/licenses/MIT.
 
 export 'pump_app.dart';
+export 'random_data.dart';
+export 'read_json_file.dart';

@@ -9,12 +9,14 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:algolia/algolia.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_good/app/app.dart';
 import 'package:flutter_good/app/app_bloc_observer.dart';
 import 'package:flutter_good/search/data/providers/algolia_provider.dart';
+import 'package:flutter_good/search/data/providers/cache_provider_imp.dart';
 import 'package:flutter_good/search/data/repositories/algolia_repository_imp.dart';
 import 'package:flutter_good/search/search.dart';
 import 'package:flutter_good/search/use_cases/ports/repositories/history_repository.dart';
@@ -30,20 +32,28 @@ void main() {
   runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
-      HydratedBloc.storage = await HydratedStorage.build(
+      final hydratedStorage = await HydratedStorage.build(
         storageDirectory: await getApplicationDocumentsDirectory(),
       );
-      runApp(App(container: await createData()));
+      HydratedBloc.storage = hydratedStorage;
+      runApp(App(container: await createData(hydratedStorage)));
     },
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
 }
 
-Future<Map<dynamic, dynamic>> createData() async {
+Future<Map<dynamic, dynamic>> createData(HydratedStorage hydratedStorage) async {
   final configString = await rootBundle.loadString('assets/config.json');
   final config = json.decode(configString) as Json;
+  final algolia = Algolia.init(
+    applicationId: config['applicationId'],
+    apiKey: config['apiKey'],
+  );
   return {
-    TextRepository: AlgoliaRepositoryImp(AlgoliaProvider(config['applicationId'], config['apiKey'])),
+    TextRepository: AlgoliaRepositoryImp(
+      AlgoliaProvider(algolia),
+      CacheProviderImp(hydratedStorage),
+    ),
     HistoryRepository: HistoryRepositoryImp(),
   };
 }

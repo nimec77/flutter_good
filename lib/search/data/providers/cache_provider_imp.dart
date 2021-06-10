@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter_good/search/domain/types.dart';
 import 'package:flutter_good/search/use_cases/ports/providers/cache_provider.dart';
@@ -9,8 +10,6 @@ class CacheProviderImp implements CacheProvider {
 
   final HydratedStorage hydratedStorage;
 
-  final emptyJson = <String, dynamic>{};
-
   @override
   Future<void> clear() async => hydratedStorage.clear();
 
@@ -18,8 +17,16 @@ class CacheProviderImp implements CacheProvider {
   Future<void> delete(String key) async => hydratedStorage.delete(key);
 
   @override
-  Json read(String key) => hydratedStorage.read(key) ?? emptyJson;
+  Json read(String key) {
+    final cachedValue = hydratedStorage.read(key);
+
+    if (cachedValue == null || (cachedValue as String).isEmpty) {
+      return emptyJson;
+    }
+
+    return json.decode(cachedValue) as Json;
+  }
 
   @override
-  Future<void> write(String key, Json json) async => hydratedStorage.write(key, json);
+  Future<void> write(String key, Json jsonMap) async => hydratedStorage.write(key, json.encode(jsonMap));
 }
