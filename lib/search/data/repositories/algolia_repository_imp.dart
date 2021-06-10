@@ -26,10 +26,9 @@ class AlgoliaRepositoryImp implements TextRepository {
       yield right([]);
       return;
     }
+    await cacheProvider.write(key, snapshots.toMap());
 
     yield* _snapshotToTextsData(snapshots);
-
-    await cacheProvider.write(key, snapshots.toMap());
   }
 
   Stream<Either<TextDataFailure, List<TextData>>> _snapshotToTextsData(AlgoliaQuerySnapshot snapshots) async* {

@@ -26,7 +26,8 @@ void main() {
   late final TextRepository algoliaRepository;
   late final Json jsonMap;
   late final AlgoliaQuerySnapshot resultSnapshot;
-  late final List<TextData> restultTextsData;
+  late final List<String> texts;
+  // late final List<TextData> resultTextsData;
 
   setUpAll(() async {
     mockSearchProvider = MockSearchProvider();
@@ -35,23 +36,45 @@ void main() {
     final jsonString = await readFile('assets/search.json');
     jsonMap = json.decode(jsonString) as Json;
     resultSnapshot = AlgoliaQuerySnapshot.fromJson(MockAlgolia(), kIndex, jsonMap);
-    restultTextsData = resultSnapshot.hits
-        .map((e) => TextData('${e.data['firstName']} ${e.data['middleName']} ${e.data['lastName']}', DateTime.now()))
-        .toList();
-    when(() => mockCacheProvider.read(any())).thenReturn(jsonMap);
-    when(() => mockSearchProvider.search(any(), any())).thenAnswer((_) async => resultSnapshot);
+    texts =
+        resultSnapshot.hits.map((e) => '${e.data['firstName']} ${e.data['middleName']} ${e.data['lastName']}').toList();
+    // resultTextsData = texts.map((e) => TextData(e, DateTime.now())).toList();
   });
 
   group('search test', () {
+    test('search some successful', () async {
+      when(() => mockCacheProvider.read(any())).thenReturn(jsonMap);
+      when(() => mockCacheProvider.write(any(), any())).thenAnswer((_) => Future.value());
+      when(() => mockSearchProvider.search(any(), any())).thenAnswer((_) async => resultSnapshot);
+      when(() => mockSearchProvider.snapshotFromJson(any(), any())).thenReturn(resultSnapshot);
 
-    test('search some', () async {
       final actual = algoliaRepository.search('query');
       final streamQueue = StreamQueue<Either<TextDataFailure, Iterable<TextData>>>(actual);
       final cachedResult = await streamQueue.next;
       cachedResult.fold(
         (_) => throw (AssertionError('Error getting TextDat')),
-        (textsData) => expect(textsData, restultTextsData),
+        (textsData) {
+          expect(textsData.length, texts.length);
+          final actualTexts = textsData.map(
+              (e) => e.maybeMap((value) => value.text, orElse: () => throw (AssertionError('Receive TextData error'))));
+          expect(actualTexts, texts);
+        },
       );
+      verify(() => mockCacheProvider.read(any())).called(1);
+      verify(() => mockSearchProvider.snapshotFromJson(any(), any())).called(1);
+
+      final searchResult = await streamQueue.next;
+      searchResult.fold(
+        (_) => throw (AssertionError('Error getting TextDat')),
+        (textsData) {
+          expect(textsData.length, texts.length);
+          final actualTexts = textsData.map(
+              (e) => e.maybeMap((value) => value.text, orElse: () => throw (AssertionError('Receive TextData error'))));
+          expect(actualTexts, texts);
+        },
+      );
+      verify(() => mockSearchProvider.search(any(), any())).called(1);
+      verify(() => mockCacheProvider.write(any(), any())).called(1);
     });
   });
 }
