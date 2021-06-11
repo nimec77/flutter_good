@@ -5,7 +5,7 @@
   "nbPages": 0,
   "hitsPerPage": 20,
   "exhaustiveNbHits": true,
-  "query": 1,
+  "query": "1",
   "params": "facetFilters=%5B%5D&optionalFilters=%5B%5D&numericFilters=%5B%5D&tagFilters=%5B%5D&query=1",
   "processingTimeMS": 1
 }

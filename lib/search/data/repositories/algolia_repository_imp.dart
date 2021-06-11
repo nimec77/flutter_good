@@ -27,14 +27,14 @@ class AlgoliaRepositoryImp implements TextRepository {
       yield left(TextDataFailure.algoliaError(error));
       return;
     }
-    print(snapshots.toString());
+
+    await cacheProvider.write(key, snapshots.toMap());
+
     if (!snapshots.hasHits) {
       yield right([]);
       return;
     }
     yield* _snapshotToTextsData(snapshots);
-
-    await cacheProvider.write(key, snapshots.toMap());
   }
 
   Stream<Either<TextDataFailure, List<TextData>>> _snapshotToTextsData(AlgoliaQuerySnapshot snapshots) async* {
