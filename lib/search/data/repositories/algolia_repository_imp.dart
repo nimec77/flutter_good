@@ -20,15 +20,21 @@ class AlgoliaRepositoryImp implements TextRepository {
     if (cachedJson.isNotEmpty) {
       yield* _snapshotToTextsData(searchProvider.snapshotFromJson(kIndex, cachedJson));
     }
-    final snapshots = await searchProvider.search(kIndex, query);
-
+    AlgoliaQuerySnapshot snapshots;
+    try {
+      snapshots = await searchProvider.search(kIndex, query);
+    } on AlgoliaError catch (error) {
+      yield left(TextDataFailure.algoliaError(error));
+      return;
+    }
+    print(snapshots.toString());
     if (!snapshots.hasHits) {
       yield right([]);
       return;
     }
-    await cacheProvider.write(key, snapshots.toMap());
-
     yield* _snapshotToTextsData(snapshots);
+
+    await cacheProvider.write(key, snapshots.toMap());
   }
 
   Stream<Either<TextDataFailure, List<TextData>>> _snapshotToTextsData(AlgoliaQuerySnapshot snapshots) async* {

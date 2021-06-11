@@ -13,7 +13,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: f4950f7d98636fbbefc10a82bbb5853c33fb2157
+      resolved-ref: "13f377f5484712c008da92241c65057ab95dd365"
       url: "https://github.com/nimec77/dart_algolia"
     source: git
     version: "1.0.1"
@@ -568,7 +568,7 @@ packages:
       name: source_gen
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.2"
   source_map_stack_trace:
     dependency: transitive
     description:
@@ -722,7 +722,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.4"
+    version: "2.1.5"
   xdg_directories:
     dependency: transitive
     description:

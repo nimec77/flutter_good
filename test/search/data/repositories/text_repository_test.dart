@@ -25,6 +25,10 @@ void main() {
       final result = textRepository.search('Reco Coder');
       streamQueue = StreamQueue<Either<TextDataFailure, Iterable<TextData>>>(result);
 
+      if (!await streamQueue!.hasNext) {
+        throw AssertionError('There is no data');
+
+      }
       final first = await streamQueue!.next;
       first.fold(
         (_) => throw (AssertionError('Error getting TextData')),
@@ -50,9 +54,13 @@ void main() {
       final textRepository = ResoRepositoryImp(max: 10, random: Random(42));
       final result = textRepository.search('query', errorTypes: ErrorTypes.error);
 
-      final streamQueue = StreamQueue<Either<TextDataFailure, Iterable<TextData>>>(result);
+      streamQueue = StreamQueue<Either<TextDataFailure, Iterable<TextData>>>(result);
 
-      final first = await streamQueue.next;
+      if (!await streamQueue!.hasNext) {
+        throw AssertionError('There is no data');
+
+      }
+      final first = await streamQueue!.next;
       first.fold(
         (error) => expect(error, const TextDataFailure.error('Server is not available')),
         (_) => throw AssertionError('Data received instead of error'),

@@ -121,7 +121,6 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-
   void showSnackBar(TextDataFailure failure) {
     final l10n = context.l10n;
 
@@ -141,7 +140,11 @@ class _SearchPageState extends State<SearchPage> {
             ),
             icon: const Icon(Icons.error, color: Colors.red),
             content: Text(
-              failure.when(unexpected: () => l10n.searchAppBarUnknownError, error: (message) => message),
+              failure.when(
+                unexpected: () => l10n.searchAppBarUnknownError,
+                error: (message) => message,
+                algoliaError: (algolia) => algolia.error.toString(),
+              ),
               style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Colors.white),
             ),
           ),
